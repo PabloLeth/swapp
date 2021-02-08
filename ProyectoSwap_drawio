@@ -1,0 +1,38 @@
+aqui un overview de las diferentes tablas:
+
+-Company:
+    
+    el nombre de la empresa y datos de contacto
+
+- Branch:
+    
+    el nombre del local de una empresa o rama de empresa y datos de contacto
+
+- Workers:
+
+    aqui se detallan los datos del trabajador tanto como a que local pertenencen y que rol desempeñan en la empresa.
+
+
+- Login:
+    //self explanatory
+
+- Shift:
+    
+    Aqui estará el turno correspondiente del trabajador (worker_id), del día (day_id) de la semana (week_id) correspondiente, y del local en concreto (branch_id) y que tipo de turno es (shift_type_id) 
+
+
+- Shift type:
+
+    esto sera el tipo de turno: mañana, tarde, libre, en espera.
+    y tendra un booleano por si el manager no permite que se cambie o si ya seha cambiado una vez por tanto no se permite cambiar de nuevo a no ser que el manager del branch de ese turno asi lo permita.
+
+
+
+
+
+
+
+
+
+
+

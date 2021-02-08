@@ -1,40 +1,39 @@
+import {useState} from "react";
+
 function Login() {
+    const [user, setUser] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handlePassword = (e) => {
+        setPassword(e.target.value)
+    }
+    const handleUser = (e) => {
+        setUser(e.target.value)
+    }
+
+
+    const login = (e) => {
+        e.preventDefault();
+              alert(`tu usuario ${user} y contraseña ${password} estan ahora en un useState`)
+
+    }
+
+    
     return (
         <>
-            <h1>Inicio de sesión</h1>
             <div className="container" id="loginContainer">
+            <h1>Inicio de sesión</h1>
                 <form>
-                    <div className="form-group">
+                    <div className="form-group form">
                         <label for="usernameLoginInput">Usuario</label>
-                        <input type="text" className="form-control" placeholder="introduce el usuario" id="usernameLoginInput" />
+                        <input type="text" onChange={handleUser} className="form-control" placeholder="introduce el usuario" id="usernameLoginInput" />
                     </div>
                     <div className="form-group">
                         <label for="passwordLoginInput">Constraseña</label>
-                        <input type="password" className="form-control" placeholder="contraseña" id="passwordLoginInput" />
+                        <input type="password" onChange={handlePassword} className="form-control" placeholder="contraseña" id="passwordLoginInput" />
                     </div>
-                    <button className="btn btn-success" id="loginButton">Iniciar sesión</button>
-                    <button className="btn btn-info" id="registerButton">registrarse</button>
-                </form>
-            </div>
-            <div className="container" id="registerContainer">
-                <form>
-                    <div className="form-group mt-4">
-                        <label for="usernameRegisterInput">Usuario</label>
-                        <input type="text" className="form-control" placeholder="nombre" id="usernameRegisterInput" />
-                    </div>
-                    <div className="form-group">
-                        <label for="surnameRegisterInput">Apellidos</label>
-                        <input type="text" className="form-control" placeholder="Apellidos" id="surnameRegisterInput" />
-                    </div>
-                    <div className="form-group">
-                        <label for="passwordRegisterInput">Constraseña</label>
-                        <input type="password" className="form-control" placeholder="contraseña" id="passwordRegisterInput" />
-                    </div>
-                    <div className="form-group">
-                        <label for="emailRegisterInput">email</label>
-                        <input type="text" className="form-control" placeholder="email" id="emailRegisterInput" />
-                    </div>
-                    <button className="btn btn-info" id="sendRegisterButton">Confirmar</button>
+                    <button className="btn btn-success " id="loginButton" onClick={login} >Iniciar sesión</button>
+                  
                 </form>
             </div>
         </>
