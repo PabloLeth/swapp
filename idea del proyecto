@@ -1,0 +1,30 @@
+La idea surgió porque en londres los turnos o Rotas eran semanales y siempre distintas, por lo que habia veces en los que los turnos no le venian bien a todo el mundo y a veces cambiabamos incluso con otros restaurantes de la misma cadena para poder conseguir un día en especial libre. Pero esto suponia el problema de tener que avisar a tu manager luego el que recibía o daba su turno avisaba a su manager, estos se tenian que poner de acuerdo via email o telefono para confirmar el cambio y aún así a veces el camarero no aparecía porque pensaba que era otro día u otra hora... entonces siempre hablabamos de lo comodo que seria poder tener una app para eso.
+
+Pues ese sería mi proyecto:
+Una aplicación web donde:
+
+- Habrá varios tipos de usuarios con diferentes niveles de privilegios: nivel usuario para los trabajadores, nivel de manager.
+
+- Tendrá un login obviamente.
+
+- Los usuarios basicos tendrán:
+
+    -  Un apartado para ver la rota (esta será semanal y luego calendario mensual que dependerá del manager).
+
+    - Otro para pedir días libres por adelantado.
+
+    - Otro donde poder poner los turnos en "subasta" de las rotas ya cerradas.
+
+    - Otro donde poder coger turnos en "subasta" de la lista de subastas. (aquí luego se podría ampliar para hacer     busquedas por zona con un google map o algo así, quizas).
+
+
+
+Los usuarios managers tendrán:
+
+    - posibilidad de hacer rotas directas con las peticiones de los trabajadores sin tener que hacerlas personalmente ya que la aplicación contará con un autorellenado donde el manager introducirá el número de trabajadores necesarios para cada día y franja horaria y los trabajadores por su lado introduciran sus peticiones (número de horas semanales min/max. por lo que se le autorellenará una Rota dummy donde luego hará los cambios necesarios. (esto solo de pensarlo da un poco de vertigo pero creo que con react y una buena base de datos sería posible)
+
+   
+
+la idea es que cuando se pida un cambio le llegue notificación a los managers de cada restaurante y ellos puedan efectuar los cambios directamente desde la aplicación y cuando sea efectuado los trabajadores que pidieron el cambio reciban la verificación.
+
+dime que te parece la idea, y si crees que es viable como proyecto o si me quedo corto. de todas formas como ampliación se le pueden incluir muchas features extra, como un rating de los trabajadores que hacen un cover  por parte de los managers, contadores de veces que se hace cover, contadores de quien hace más peticiones de cambios, o poner un chat interno para los trabajadores, o poner zona de fotos para cuando las staff parties, o updates importantes con aviso a todos los trabajadores como cambios a ultima hora, o muchas otras que llegado el momento puedo comentarte y si hay tiempo implementarlas.
