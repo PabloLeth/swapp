@@ -1,0 +1,5 @@
+- en react tengo que crear un Usestate para mandar los campos a la base de datos, como hago esa relacion?
+
+- para la base de datos para usar el DNI como relacion de tabla login necesito poner el campo dni como primary key o hay otra forma? 
+
+
