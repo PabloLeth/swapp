@@ -1,32 +1,38 @@
 function Register() {
 
-    const [user, setUser] = useState("");
-    const [password, setPassword] = useState("");
+    const RegisterInput = {
+        name: "",
+        password: "",
+        surname: "",
+        email:"",   
+    }
 
     const handlePassword = (e) => {
-        setPassword(e.target.value)
+        RegisterInput.password = e.target.value
     }
     const handleUser = (e) => {
-        setUser(e.target.value)
+        RegisterInput.email = e.target.value
     }
 
-
-    const login = (e) => {
-        e.preventDefault();
-              alert(`tu usuario ${user} y contraseña ${password} estan ahora en un useState`)
-
+    const handleName = (e) => {
+        RegisterInput.name = e.target.value
     }
+ const submit = (e) => {
+     e.preventDefault();
+ }
+
+  
     return (
         <>
-            <h1>Registrar</h1>
+            <h1>Registrar usuario</h1>
            
             <div className="container" id="registerContainer">
                 <form>
                     <div className="form-group mt-4">
                         <label for="usernameRegisterInput">nombre</label>
-                        <input type="text" className="form-control" placeholder="nombre" id="usernameRegisterInput" />
+                        <input type="text" className="form-control" onChange={handleName} placeholder="nombre" id="usernameRegisterInput" />
                     </div>  
-                    <div className="form-group">
+                    <div className="form-group mt-4">
                         <label for="surnameRegisterInput">Apellidos</label>
                         <input type="text" className="form-control" placeholder="Apellidos" id="surnameRegisterInput" />
                     </div>
@@ -34,11 +40,11 @@ function Register() {
                         <label for="dniRegisterInput">Dni</label>
                         <input type="text" className="form-control" placeholder="nombre" id="dniRegisterInput" />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group mt-4">
                         <label for="passwordRegisterInput">Constraseña</label>
                         <input type="password" className="form-control" placeholder="contraseña" id="passwordRegisterInput" />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group mt-4">
                         <label for="emailRegisterInput">email</label>
                         <input type="text" className="form-control" placeholder="email" id="emailRegisterInput" />
                     </div>
@@ -46,7 +52,7 @@ function Register() {
                         <label for="telephoneRegisterInput">telefono</label>
                         <input type="text" className="form-control" placeholder="nombre" id="telephoneRegisterInput" />
                     </div>
-                    <button className="btn btn-info" id="sendRegisterButton">Confirmar</button>
+                    <button className="btn btn-info" onClick={submit} id="sendRegisterButton">Confirmar</button>
                 </form>
             </div>
         </>

@@ -1,20 +1,23 @@
-import {useState} from "react";
+
 
 function Login() {
-    const [user, setUser] = useState("");
-    const [password, setPassword] = useState("");
+
+    const loginInput = {
+        email: "",
+        password: ""
+    }
 
     const handlePassword = (e) => {
-        setPassword(e.target.value)
+        loginInput.password = e.target.value
     }
     const handleUser = (e) => {
-        setUser(e.target.value)
+        loginInput.email = e.target.value
     }
 
 
     const login = (e) => {
         e.preventDefault();
-              alert(`tu usuario ${user} y contraseña ${password} estan ahora en un useState`)
+              alert(`tu usuario ${loginInput.email} y contraseña ${loginInput.password} `)
 
     }
 
@@ -24,9 +27,9 @@ function Login() {
             <div className="container " id="loginContainer">
             <h1>Inicio de sesión</h1>
                 <form>
-                    <div className="form-group form">
+                    <div className="form-group form ">
                         <label for="usernameLoginInput">Usuario</label>
-                        <input type="text" onChange={handleUser} className="form-control col-4" placeholder="introduce el usuario" id="usernameLoginInput" />
+                        <input type="text" onChange={handleUser} className="form-control col-4 " placeholder="introduce el usuario" id="usernameLoginInput" />
                     </div>
                     <div className="form-group form ">
                         <label for="passwordLoginInput">Constraseña</label>

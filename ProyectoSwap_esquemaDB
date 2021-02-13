@@ -26,6 +26,25 @@ aqui un overview de las diferentes tablas:
     esto sera el tipo de turno: mañana, tarde, libre, en espera.
     y tendra un booleano por si el manager no permite que se cambie o si ya seha cambiado una vez por tanto no se permite cambiar de nuevo a no ser que el manager del branch de ese turno asi lo permita.
 
+- message:
+
+    esto seran los mensajes para un chat interno aqui tiene la fecha que se envio el mensaje, el chat al que pertenece y quien lo manda.
+
+-chat_user:
+    
+    esta es una tabla intermedia para relacionar los chats con los usuarios al ser de muchos a muchos.
+
+-chat:
+
+    aqui seria el nombre del chat y tendria un type que identifica si es un grupo o si es un chat privado que viene dado por la tabla Chat_type.
+
+
+POSIBLES ERRORES EN LA BASE DE DATOS QUE DEBO MEJORAR:
+
+- que un trabajador no tenga mas de un turno por sesion(mañana y tarde) y que las horas no se pisen entre los turnos de mañana y tarde.
+
+
+
 
 
 

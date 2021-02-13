@@ -11,17 +11,19 @@ function Rota(){
         ],
 
     }
-        
+        const myFunction = (e) =>{
+            alert("aqui mandará el detalle del turno con boton empezar proceso de cambio")
+        }
 const body = workers.worker1.map(worker =>
     <tr>
         <th scope ="row" className="table-warning">{worker.week_id}</th>
-        <td className="table-success">{worker.monday}</td>
-        <td className="table-success">{worker.tuesday}</td>
-        <td className="table-success">{worker.wednesday}</td> 
-        <td className="table-success">{worker.thursday}</td> 
-        <td className="table-success">{worker.friday}</td> 
-        <td className="table-success">{worker.saturday}</td> 
-        <td className="table-success">{worker.sunday}</td> 
+        <td className="table-success" onClick={myFunction}>{worker.monday}</td>
+        <td className="table-success" onClick={myFunction}>{worker.tuesday}</td>
+        <td className="table-success" onClick={myFunction}>{worker.wednesday}</td> 
+        <td className="table-success" onClick={myFunction}>{worker.thursday}</td> 
+        <td className="table-success" onClick={myFunction}>{worker.friday}</td> 
+        <td className="table-success" onClick={myFunction}>{worker.saturday}</td> 
+        <td className="table-success" onClick={myFunction}>{worker.sunday}</td> 
     </tr>
     )
     
