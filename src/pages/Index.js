@@ -1,4 +1,5 @@
 import Login from '../components/Login';
+import './index.css';
 function Indice() {
     return (
       <>
@@ -6,7 +7,7 @@ function Indice() {
       <div>
        <p>hola este es el indice</p>
       </div>
-      <Login />
+  
       </>
     );
   }

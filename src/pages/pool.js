@@ -1,5 +1,6 @@
 import ListShifts from '../components/ListShifts';
 import SearchShifts from '../components/SearchShifts';
+import './pool.css';
 function pool() {
     return (
       <>

@@ -91,9 +91,7 @@ function RotaMaker() {
 
                     <p>{shift.start_shift.substr(11, 5)}~{shift.end_shift.substr(11, 5)}</p>
 
-
                 </td>
-
 
             )}
             </tr>

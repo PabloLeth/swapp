@@ -1,0 +1,1 @@
+INSERT INTO Workers (worker_id, worker_name, worker_surname, email, password, phone_number, dni, branch_id, role_id) VALUES (NULL, 'DA BOSS', 'OF BOSSES', 'daboss@bossy.com', '1234', '666666666', '10111001A', '1', '8');
