@@ -72,7 +72,16 @@ function RotaMaker() {
         ]
     };
 
-
+    // const workersTable = data.data.map(worker =>
+    //     <>
+    //     <tr>
+    //         <th rowspan="2" scope="rowgroup" className="table-warning">{worker.name}</th>
+    //         {worker.shifts.map( )}
+             
+    //     </tr>
+         
+    //     </>
+    // )
     const shifts = [{ worker_id: 1, }, {}, {}];
     const [shift, setShift] = useState("");
 
@@ -84,15 +93,20 @@ function RotaMaker() {
     const body = data.data.map(worker =>
         <>
         <tr>
-            <th colspan="2" scope="rowgroup" className="table-warning">{worker.name}</th>
+            <th rowspan="2" scope="rowgroup" className="table-warning">{worker.name}</th>
             {worker.shifts.map(shift =>
-
+                (shift.shift_type == "MORNING")?
                 <td key={shift.shift_id} className="table-success" >
 
                     <p>{shift.start_shift.substr(11, 5)}~{shift.end_shift.substr(11, 5)}</p>
 
                 </td>
+                :
+                <td key={shift.shift_id} className="table-success" >
 
+                <p></p>
+
+            </td>
             )}
             </tr>
          

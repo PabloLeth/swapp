@@ -3,15 +3,16 @@
 function Login() {
 
     const loginInput = {
-        email: "",
+        username: "",
         password: ""
     }
+   
 
     const handlePassword = (e) => {
         loginInput.password = e.target.value
     }
     const handleUser = (e) => {
-        loginInput.email = e.target.value
+        loginInput.username = e.target.value
     }
 
     const URLLOGIN = "http://localhost/symfonyswapp/public/index.php/login";
@@ -19,12 +20,17 @@ function Login() {
     const login = (e) => {
         // funtcion to log into website
         e.preventDefault();
-        alert(`tu usuario ${loginInput.email} y contraseña ${loginInput.password} `);
+        alert(`tu usuario ${loginInput.username} y contraseña ${loginInput.password} `);
+        
         fetch( URLLOGIN , {
-            method: 'post',
+            method: 'POST',
+            headers:{
+                'Content-Type' : 'application/json'
+            },
             body: JSON.stringify(loginInput)
           }).then(response => response.json())
           .then(data => {
+            //  setToken = data.token;
           console.log(data);
           });
 

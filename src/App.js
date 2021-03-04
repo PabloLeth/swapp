@@ -17,7 +17,7 @@ if (!token){
 
   return (
     <>
-  
+  <Navbar/>
      <div className="wrapper">
       <BrowserRouter>
         <Switch>
