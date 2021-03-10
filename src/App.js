@@ -11,7 +11,7 @@ import ChatWindow from './components/ChatWindow';
 import jwt_decode from "jwt-decode";
 function App() {
 
-  const tokenStored =localStorage.getItem("token");
+  const tokenStored = localStorage.getItem("token");
   // const decodedToken = jwt_decode(tokenStored);
   // console.log(decodedToken);
    const [authTokens, setAuthTokens] = useState(tokenStored);
@@ -20,8 +20,7 @@ function App() {
      setAuthTokens(data);
    }
 
- 
-    return (
+     return (
       <>
     <AuthContext.Provider value={{authTokens, setAuthTokens: setTokens}}>
       <Navbar />
@@ -29,26 +28,5 @@ function App() {
       </>
     );
   }
-
-
-//   return (
-//     <>
-//       <div className="wrapper">
-//         <BrowserRouter>
-//           <Switch>
-//             {/* <Route path="/login">
-//             <LoginPage />
-//           </Route> */}
-//             <Route path="/Chat">
-//               <ChatWindow />
-//             </Route>
-//           </Switch>
-//         </BrowserRouter>
-//       </div>
-
-
-//     </>
-//   );
-// }
 
 export default App;

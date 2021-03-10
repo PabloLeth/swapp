@@ -1,0 +1,20 @@
+.chatcontent{
+    height: 80vh;
+    width: 80vw ;
+   display: flex;
+      background-color: aquamarine;
+      border: brown 1px solid;
+}
+.messagecontent{
+    
+}
+.chatinput{
+    background-color: blueviolet;
+   
+    align-self: flex-end;
+    
+
+}
+.chatinput input{
+    width: 80vh;
+}

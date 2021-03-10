@@ -1,7 +1,10 @@
+import {useState} from 'react';
+import ModalShift from './ModalShift';
 
 function Rota(){
    // const week = ["#","Monday","Tuesday","Wednesday","Friday","Saturday","Sunday"];
    // const workers = [  { worker1 : {name : "pablo"}, worker2 : {name: "ana"}, worker3 : {name: "pape"}}  ];
+ const [show, setShow] = useState(false);
  
     const workers = {
         worker1:[
@@ -11,23 +14,27 @@ function Rota(){
         ],
 
     }
-        const myFunction = (e) =>{
-            alert("aqui mandará el detalle del turno con boton empezar proceso de cambio")
+    
+        const shiftToPool = () =>{
+           // alert("aqui mandará el detalle del turno con boton empezar proceso de cambio");
+            setShow(!show);
         }
 const body = workers.worker1.map(worker =>
     <tr>
         <th scope ="row" className="table-warning">{worker.week_id}</th>
-        <td className="table-success" onClick={myFunction}>{worker.monday}</td>
-        <td className="table-success" onClick={myFunction}>{worker.tuesday}</td>
-        <td className="table-success" onClick={myFunction}>{worker.wednesday}</td> 
-        <td className="table-success" onClick={myFunction}>{worker.thursday}</td> 
-        <td className="table-success" onClick={myFunction}>{worker.friday}</td> 
-        <td className="table-success" onClick={myFunction}>{worker.saturday}</td> 
-        <td className="table-success" onClick={myFunction}>{worker.sunday}</td> 
+        <td className="table-success" onClick={() => shiftToPool()} >{worker.monday}</td>
+        <td className="table-success" onClick={() => shiftToPool()}>{worker.tuesday}</td>
+        <td className="table-success" onClick={() => shiftToPool()}>{worker.wednesday}</td> 
+        <td className="table-success" onClick={() => shiftToPool()}>{worker.thursday}</td> 
+        <td className="table-success" onClick={() => shiftToPool()}>{worker.friday}</td> 
+        <td className="table-success" onClick={() => shiftToPool()}>{worker.saturday}</td> 
+        <td className="table-success" onClick={() => shiftToPool()}>{worker.sunday}</td> 
     </tr>
     )
     
     return (
+        <>
+       
         <table className="table table-hover">
             
             <thead className="table-dark">
@@ -50,6 +57,7 @@ const body = workers.worker1.map(worker =>
            
            
         </table>
+        </>
     )
 }
 

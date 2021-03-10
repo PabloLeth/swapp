@@ -1,9 +1,13 @@
+import './chatWindow.css';
 
 function ChatWindow() {
 
     return (
-        <div className="container">
-            <div>
+        <div className="chatcontent">
+            <div className="messagecontent">
+
+            </div>
+            <div className="chatinput">
             <input type="text" placeholder="escribir texto aquí" />
             <button>send</button>
             </div>

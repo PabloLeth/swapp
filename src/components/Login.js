@@ -5,7 +5,7 @@ import {useAuth} from '../context/auth'
 
 function Login() {
     // const {isloged, setIsloged} = useContext(GlobalContext);
-    const {isloged, setIsloged} = useState(false);
+    const [isloged, setIsloged] = useState(false);
 const {setAuthTokens} = useAuth();
 
     const loginInput = {
