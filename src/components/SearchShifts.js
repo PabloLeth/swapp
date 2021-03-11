@@ -1,4 +1,5 @@
 import {useState} from 'react';
+
 function SearchShifts() {
     const [search, setSearch] = useState("");
 
@@ -18,6 +19,7 @@ function SearchShifts() {
      className="form-control col-4" 
      placeholder="introduce el restaurante donde buscar turnos" 
      value={search} onChange ={ (e) => {setSearch(e.target.value)}} />
+     <input type="submit" value="busca"/>
     </form>
       </div>
      
