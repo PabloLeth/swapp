@@ -5,6 +5,7 @@ function Rota(){
    // const week = ["#","Monday","Tuesday","Wednesday","Friday","Saturday","Sunday"];
    // const workers = [  { worker1 : {name : "pablo"}, worker2 : {name: "ana"}, worker3 : {name: "pape"}}  ];
  const [show, setShow] = useState(false);
+
  
     const workers = {
         worker1:[
@@ -16,8 +17,14 @@ function Rota(){
     }
     
         const shiftToPool = () =>{
-           // alert("aqui mandará el detalle del turno con boton empezar proceso de cambio");
-            setShow(!show);
+            alert("aqui mandará el detalle del turno con boton empezar proceso de cambio");
+           // setShow(!show);
+           
+         //  if (confirm(` confirma que desea deshacerse de este turno ${shift.id}, ${shift.date} `)){
+         //       functionfetchingtoswapping();
+         //       alert("perfecto, tu turno ha ido a la piscina de turnos");
+         //   }
+           //aqui ira una funcion con un fetch para cambiar swapping a true
         }
 const body = workers.worker1.map(worker =>
     <tr>
