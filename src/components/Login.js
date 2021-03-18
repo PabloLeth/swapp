@@ -21,7 +21,7 @@ const {setAuthTokens} = useAuth();
         loginInput.username = e.target.value
     }
 
-    const URLLOGIN = "http://localhost/symfonyswapp/public/index.php/login";
+    const URLLOGIN = "http://localhost:8000/login";
 
     const login = (e) => {
         // funtcion to log into Swapp
@@ -43,7 +43,7 @@ const {setAuthTokens} = useAuth();
                      setIsloged(true);
                 }
               
-                console.log(data);
+              
                
             }).catch(error => console.log("ha habido un error:", error));
 

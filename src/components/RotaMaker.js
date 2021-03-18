@@ -1,7 +1,51 @@
 import { useState } from "react";
+
 function RotaMaker() {
-    // const week = ["#","Monday","Tuesday","Wednesday","Friday","Saturday","Sunday"];
-    const workers = [{ name: "pablo", id: 1 }, { name: "ana", id: 2 }, { name: "pepe", id: 3 }];
+                     // const week = ["#","Monday","Tuesday","Wednesday","Friday","Saturday","Sunday"];
+
+    const month = ["Enero", "Febrero", "Marzo", "Abril","Mayo","Junio","Julio","Agosto","Sepotiembre","Octubre","Noviembre","Diciembre"]
+    const today = new Date;
+    const todayWeek = [];
+    
+    for (let i = 1; i <= 7; i++) {
+      let first = today.getDate() - today.getDay() + i ;
+      let day = new Date(today.setDate(first));/* .toISOString().slice(0, 10); */
+      todayWeek.push(day);
+    }
+ 
+
+   const [week, setWeek] = useState(todayWeek);
+
+   function handlenext(){
+    nextWeek();
+    
+   }
+   function handleprev(){
+    prevWeek();
+    
+   }
+   function nextWeek() {
+    const weekResult = [];
+    week.map(date=>{
+       
+        let result = new Date(date);
+        result.setDate(result.getDate() + 7);
+        weekResult.push(result);
+
+    })
+
+    return setWeek(weekResult);
+  }
+  function prevWeek() {
+    const weekResult = [];
+    week.map(date =>{
+       let result = new Date(date);
+        result.setDate(result.getDate() - 7);
+        weekResult.push(result);
+    })
+    return setWeek(weekResult);
+  }
+
     const data = {
         "data": [
             {
@@ -71,104 +115,121 @@ function RotaMaker() {
             }
         ]
     };
-
-    // const workersTable = data.data.map(worker =>
+    const dataEmpty = [
+        {"name": "antonio ","id": 2},
+        {"name": "DA BOSS","id": 3},
+        {"name": "antonio","id": 4},
+        {"name": "ana","id": 5},
+        {"name": "Raquel","id": 6},
+        {"name": "Belen","id": 7},
+        {"name": "juan","id": 8},
+        {"name": "rocio","id": 9},
+        {"name": "Pedro","id": 10},
+        {"name": "laura","id": 11},
+        {"name": "andrea","id": 12},
+        {"name": "alejandro","id": 13},
+        {"name": "eladio","id": 14}
+      ]
+     
+    // const bodyCreate = dataEmpty.map(worker =>
+       
+    //     {
+    //         for (let i = 0; i < 7; i++) {
+                
+    //            <td data-shift="startShift" data-column={i} id={worker.id}><input type="time"/></td>
+    //            <td data-shift="endtShift" data-column={i} id={worker.id}><input type="time"/></td>
+    //          }
+       
     //     <>
-    //     <tr>
-    //         <th rowspan="2" scope="rowgroup" className="table-warning">{worker.name}</th>
-    //         {worker.shifts.map( )}
-             
-    //     </tr>
-         
+    //         <tr>
+    //             <th rowspan="2" id={worker.id} >{worker.id}, {worker.name}</th> 
+              
+    //         </tr>
+    //         <tr>
+
+    //         </tr>
     //     </>
-    // )
-    const shifts = [{ worker_id: 1, }, {}, {}];
-    const [shift, setShift] = useState("");
+    //      }
+    //     )
+ 
 
-    const handleshift = (e) => {
 
-        setShift(e.target.value);
-    }
+    // const [shift, setShift] = useState("");
+
+    // const handleshift = (e) => {
+
+    //     setShift(e.target.value);
+    // }
 
     const body = data.data.map(worker =>
         <>
-        <tr>
-            <th rowspan="2" scope="rowgroup" className="table-warning">{worker.name}</th>
-            {worker.shifts.map(shift =>
-                (shift.shift_type == "MORNING")?
-                <td key={shift.shift_id} className="table-success" >
+            <tr>
+                <th rowspan="2" scope="rowgroup" className="table-warning">{worker.name}</th>
+                {worker.shifts.map(shift =>
+                    (shift.shift_type == "MORNING") ?
+                        <td key={shift.shift_id} className="table-success" >
 
-                    <p>{shift.start_shift.substr(11, 5)}~{shift.end_shift.substr(11, 5)}</p>
+                            <p>{shift.start_shift.substr(11, 5)}~{shift.end_shift.substr(11, 5)}</p>
 
-                </td>
-                :
-                <td key={shift.shift_id} className="table-success" >
+                        </td>
+                        :
+                        <td key={shift.shift_id} className="table-success" >
 
-                <p></p>
+                            <p></p>
 
-            </td>
-            )}
+                        </td>
+                )}
             </tr>
-         
-            </>
 
-            /*
-             <td className="table-success" >
-                <input type="text" onChange={handleshift} className="col" />
-                   <input type="text" onChange={handleshift} placeholder={shift.start_shift.substr(11,5)} className="col-6" />
-                <input type="text" onChange={handleshift} placeholder={shift.end_shift.substr(11,5)} className="col-6" />
-            </td>
-            <td className="table-success" >
-                <input type="text" onChange={handleshift} className="col" />
-
-            </td>
-            <td className="table-success" >
-                <input type="text" onChange={handleshift} className="col" />
-            </td>
-            <td className="table-success" >
-                <input type="text" onChange={handleshift} className="col" />
-            </td>
-            <td className="table-success" >
-                <input type="text" onChange={handleshift} className="col" />
-            </td>
-            <td className="table-success" >
-                <input type="text" onChange={handleshift} className="col" />
-            </td>
-            <td className="table-success" >
-                <input type="text" onChange={handleshift} className="col" />
-            </td> */
+        </>
 
 
-       
     )
 
     return (
+        <>
+        <div className="container row justify-content-around ">
+            <input type="button" value="semana anterior"onClick={()=>{handleprev()}}  />
+            <div className="text-center" >
+                <h1>{week[0].getFullYear()}</h1>
+                <h3>semana del {week[0].getDate()} de {month[week[0].getMonth()]} al {week[6].getDate()} de {month[week[6].getMonth()]}</h3>
+            </div>
+            <input type="button" value="semana proxima" onClick={()=>{handlenext()}}/>
+        </div>
+     
+       
+            <table className="table text-center my-3">
+            {/* <caption> Rota </caption> */}
+                <thead className="table-dark ">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Monday</th>
+                        <th scope="col">Tuesday</th>
+                        <th scope="col">Wednesday</th>
+                        <th scope="col">Thursday</th>
+                        <th scope="col">Friday</th>
+                        <th scope="col">Saturday</th>
+                        <th scope="col">Sunday</th>
+                    </tr>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">{("0"+week[0].getDate()).slice(-2)}-{("0" + (week[0].getMonth() + 1)).slice(-2)}</th>
+                        <th scope="col">{("0"+week[1].getDate()).slice(-2)}-{("0" + (week[1].getMonth() + 1)).slice(-2)}</th>
+                        <th scope="col">{("0"+week[2].getDate()).slice(-2)}-{("0" + (week[2].getMonth() + 1)).slice(-2)}</th>
+                        <th scope="col">{("0"+week[3].getDate()).slice(-2)}-{("0" + (week[3].getMonth() + 1)).slice(-2)}</th>
+                        <th scope="col">{("0"+week[4].getDate()).slice(-2)}-{("0" + (week[4].getMonth() + 1)).slice(-2)}</th>
+                        <th scope="col">{("0"+week[5].getDate()).slice(-2)}-{("0" + (week[5].getMonth() + 1)).slice(-2)}</th>
+                        <th scope="col">{("0"+week[6].getDate()).slice(-2)}-{("0" + (week[6].getMonth() + 1)).slice(-2)}</th>
+                   
+                    </tr>
+                </thead>
+                <tbody className="table-hover">
+                    {/* condicion, si hay datos{body} : {} */}
+                    {body}
 
-        <table className="table table-hover">
-
-            <thead className="table-dark">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">{data.data[0].shifts[0].start_shift.substr(5, 5)}</th>
-                    <th scope="col">Tuesday</th>
-                    <th scope="col">Wednesday</th>
-                    <th scope="col">Thursday</th>
-                    <th scope="col">Friday</th>
-                    <th scope="col">Saturday</th>
-                    <th scope="col">Sunday</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                {body}
-
-
-
-            </tbody>
-
-
-
-        </table>
+                </tbody>
+            </table>
+        </>
     )
 }
 
