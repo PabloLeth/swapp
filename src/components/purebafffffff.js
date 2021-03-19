@@ -131,31 +131,32 @@ function RotaMaker() {
         {"name": "eladio","id": 14}
       ]
      
-    const bodyCreate = 
-        <> {dataEmpty.map(worker =>
-            
-            shfitType.map(type => {
-                let cabecera =""
-                if (type=="morning"){
-                     cabecera =  <th className="table-dark" rowspan="2" id={worker.id} >{worker.id}, {worker.name}</th>;
-                } 
-                return (
-                    <tr>
-                     { cabecera }
-                {week.map(day=> {
+    const bodyCreate = dataEmpty.map(worker =>
+    
+        {
+            shfitType.map(type => { 
+                week.map(day=> {
                     let datestr = day.toISOString().slice(0, 10);
-                   return ( <>
+                    let tddays= <>
                     <td data-shfitType={type} data-shift="startShift" data-date={datestr} data-id={worker.id}><input type="time"/></td>
                     <td data-shfitType={type} data-shift="endtShift" data-date={datestr} data-id={worker.id}><input type="time"/></td>
-                    </>)
+                    </>
+                    trdays.push(tddays)
+                  })
                   
-                  })}
-                  </tr>
-                )}
-                
-            )
-        )}
-         </>
+            })
+       
+        
+            <tr>
+                <th rowspan="2" id={worker.id} >{worker.id}, {worker.name}</th> 
+              semana mañana
+            </tr>
+            <tr>
+                semana tarde {trdays}
+            </tr>
+        
+         }
+    )
  
 
 
@@ -203,35 +204,35 @@ function RotaMaker() {
         </div>
      
        
-            <table className="table table-sm table-bordered text-center my-3">
+            <table className="table text-center my-3">
             {/* <caption> Rota </caption> */}
                 <thead className="table-dark ">
                     <tr>
                         <th scope="col">#</th>
-                        <th colspan="2" scope="col">Monday</th>
-                        <th colspan="2" scope="col">Tuesday</th>
-                        <th colspan="2" scope="col">Wednesday</th>
-                        <th colspan="2" scope="col">Thursday</th>
-                        <th colspan="2" scope="col">Friday</th>
-                        <th colspan="2" scope="col">Saturday</th>
-                        <th colspan="2" scope="col">Sunday</th>
+                        <th scope="col">Monday</th>
+                        <th scope="col">Tuesday</th>
+                        <th scope="col">Wednesday</th>
+                        <th scope="col">Thursday</th>
+                        <th scope="col">Friday</th>
+                        <th scope="col">Saturday</th>
+                        <th scope="col">Sunday</th>
                     </tr>
                     <tr>
                         <th scope="col"></th>
-                        <th colspan="2" scope="col">{("0"+week[0].getDate()).slice(-2)}-{("0" + (week[0].getMonth() + 1)).slice(-2)}</th>
-                        <th colspan="2" scope="col">{("0"+week[1].getDate()).slice(-2)}-{("0" + (week[1].getMonth() + 1)).slice(-2)}</th>
-                        <th colspan="2" scope="col">{("0"+week[2].getDate()).slice(-2)}-{("0" + (week[2].getMonth() + 1)).slice(-2)}</th>
-                        <th colspan="2" scope="col">{("0"+week[3].getDate()).slice(-2)}-{("0" + (week[3].getMonth() + 1)).slice(-2)}</th>
-                        <th colspan="2" scope="col">{("0"+week[4].getDate()).slice(-2)}-{("0" + (week[4].getMonth() + 1)).slice(-2)}</th>
-                        <th colspan="2" scope="col">{("0"+week[5].getDate()).slice(-2)}-{("0" + (week[5].getMonth() + 1)).slice(-2)}</th>
-                        <th colspan="2" scope="col">{("0"+week[6].getDate()).slice(-2)}-{("0" + (week[6].getMonth() + 1)).slice(-2)}</th>
+                        <th scope="col">{("0"+week[0].getDate()).slice(-2)}-{("0" + (week[0].getMonth() + 1)).slice(-2)}</th>
+                        <th scope="col">{("0"+week[1].getDate()).slice(-2)}-{("0" + (week[1].getMonth() + 1)).slice(-2)}</th>
+                        <th scope="col">{("0"+week[2].getDate()).slice(-2)}-{("0" + (week[2].getMonth() + 1)).slice(-2)}</th>
+                        <th scope="col">{("0"+week[3].getDate()).slice(-2)}-{("0" + (week[3].getMonth() + 1)).slice(-2)}</th>
+                        <th scope="col">{("0"+week[4].getDate()).slice(-2)}-{("0" + (week[4].getMonth() + 1)).slice(-2)}</th>
+                        <th scope="col">{("0"+week[5].getDate()).slice(-2)}-{("0" + (week[5].getMonth() + 1)).slice(-2)}</th>
+                        <th scope="col">{("0"+week[6].getDate()).slice(-2)}-{("0" + (week[6].getMonth() + 1)).slice(-2)}</th>
                    
                     </tr>
                 </thead>
                 <tbody className="table-hover">
                     {/* condicion, si hay datos{body} : {} */}
-                   {/*  {body} */}
-                    {bodyCreate}
+                    {body}
+
                 </tbody>
             </table>
         </>
