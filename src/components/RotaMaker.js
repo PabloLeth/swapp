@@ -1,9 +1,10 @@
 import { useState } from "react";
-
+import ReactDOM from "react-dom";
 function RotaMaker() {
+   
                      // const week = ["#","Monday","Tuesday","Wednesday","Friday","Saturday","Sunday"];
     const shfitType = ["morning", "evening"]
-    const month = ["Enero", "Febrero", "Marzo", "Abril","Mayo","Junio","Julio","Agosto","Sepotiembre","Octubre","Noviembre","Diciembre"]
+    const month = ["Enero", "Febrero", "Marzo", "Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
     const today = new Date;
     const todayWeek = [];
     
@@ -140,13 +141,13 @@ function RotaMaker() {
                      cabecera =  <th className="table-dark" rowspan="2" id={worker.id} >{worker.id}, {worker.name}</th>;
                 } 
                 return (
-                    <tr>
-                     { cabecera }
+                <tr>
+                { cabecera }
                 {week.map(day=> {
                     let datestr = day.toISOString().slice(0, 10);
                    return ( <>
-                    <td data-shfitType={type} data-shift="startShift" data-date={datestr} data-id={worker.id}><input type="time"/></td>
-                    <td data-shfitType={type} data-shift="endtShift" data-date={datestr} data-id={worker.id}><input type="time"/></td>
+                    <td data-shfitType={type} data-shift="startShift" data-date={datestr} data-id={worker.id}><input type="time" required/></td>
+                    <td data-shfitType={type} data-shift="endtShift" data-date={datestr} data-id={worker.id}><input type="time" required/></td>
                     </>)
                   
                   })}
@@ -155,11 +156,16 @@ function RotaMaker() {
                 
             )
         )}
-         </>
+         </>;
  
 
+                  const tdcollection = ()  => {
+                    const tdcollection = ReactDOM.findDOMNode(document.getElementById("table-rota").getElementsByTagName("td"));
+                    
+                    console.log(tdcollection);
 
-    // const [shift, setShift] = useState("");
+                  }
+    // const [shift, setShift] = useState(""); 
 
     // const handleshift = (e) => {
 
@@ -203,7 +209,7 @@ function RotaMaker() {
         </div>
      
        
-            <table className="table table-sm table-bordered text-center my-3">
+            <table id="table-rota" className="table table-sm table-bordered text-center my-3">
             {/* <caption> Rota </caption> */}
                 <thead className="table-dark ">
                     <tr>
@@ -234,6 +240,7 @@ function RotaMaker() {
                     {bodyCreate}
                 </tbody>
             </table>
+            <button onClick={()=>{tdcollection()}}>tds</button>
         </>
     )
 }
