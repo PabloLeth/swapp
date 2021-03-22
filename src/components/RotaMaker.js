@@ -3,19 +3,47 @@ import ReactDOM from "react-dom";
 function RotaMaker() {
    
                      // const week = ["#","Monday","Tuesday","Wednesday","Friday","Saturday","Sunday"];
-    const shfitType = ["morning", "evening"]
-    const month = ["Enero", "Febrero", "Marzo", "Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
+    const shfitType = ["morning", "evening"]; /* necesito cambiarlo por 0 y 1 para el back */
+    const month = ["Enero", "Febrero", "Marzo", "Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
     const today = new Date;
+    let token = localStorage.getItem("token");
     const todayWeek = [];
     
     for (let i = 1; i <= 7; i++) {
       let first = today.getDate() - today.getDay() + i ;
-      let day = new Date(today.setDate(first));/* .toISOString().slice(0, 10); */
+      let day = new Date(today.setDate(first));
       todayWeek.push(day);
     }
- 
     
+    const[turnos, setTurnos] = useState();
+
    const [week, setWeek] = useState(todayWeek);
+
+   function getDataWeek(){
+    const URLROTA = "http://localhost:8000/manager/rotacheck";
+  
+    const reqOpt = {
+      method: 'POST',
+      headers: { 'Content-Type' : 'application/json',
+                 Authorization : `Bearer ${token}`
+                },
+      body: JSON.stringify({dateFromjsn :(week[0].toISOString().slice(0, 10)), dateFromjsn: (week[6].toISOString().slice(0, 10)) })
+     
+    };
+  
+     /* checkear el fetch  */
+      fetch(URLROTA,reqOpt)
+      .then((response) => {
+        if (response.status === 240){
+            /* hace falta este if? */
+        };
+          response.json() })
+      .then(data => {console.log(data.answer)}
+  
+      ).catch(error => {
+       console.log("ha habido un error:", error)
+      });
+   }
 
    function handlenext(){
     nextWeek();
@@ -116,7 +144,7 @@ function RotaMaker() {
             }
         ]
     };
-    const dataEmpty = [
+    const dataResponse = [
         {"name": "antonio ","id": 2},
         {"name": "DA BOSS","id": 3},
         {"name": "antonio","id": 4},
@@ -133,11 +161,11 @@ function RotaMaker() {
       ]
      
     const bodyCreate = 
-        <> {dataEmpty.map(worker =>
+        <> {dataResponse.map(worker =>
             
             shfitType.map(type => {
-                let cabecera =""
-                if (type=="morning"){
+                let cabecera ="";
+                if (type=="morning"){ /* para poner cabecera con nombre en mañana y tarde por rowspan */
                      cabecera =  <th className="table-dark" rowspan="2" id={worker.id} >{worker.id}, {worker.name}</th>;
                 } 
                 return (
@@ -145,10 +173,16 @@ function RotaMaker() {
                 { cabecera }
                 {week.map(day=> {
                     let datestr = day.toISOString().slice(0, 10);
+                 
                    return ( <>
-                    <td data-shfitType={type} data-shift="startShift" data-date={datestr} data-id={worker.id}><input type="time" required/></td>
-                    <td data-shfitType={type} data-shift="endtShift" data-date={datestr} data-id={worker.id}><input type="time" required/></td>
+                    <td data-shiftType={type} data-date={datestr} data-id={worker.id}>
+                        <input data-shift="startShift" type="time" required onChange={(e)=>{getValue(e)}}/>
+                   
+                        <input data-shift="endShift" type="time" required onChange={(e)=>{getValue(e)}}/>
+
+                    </td>
                     </>)
+                    
                   
                   })}
                   </tr>
@@ -157,12 +191,35 @@ function RotaMaker() {
             )
         )}
          </>;
- 
+                  const getValue= (e) =>{
+                      console.log("target:",e.target);
+                      console.log(e.target);
+                      console.log("target.value:", e.target.value);
+                    let jsondata = {
+                        [(e.target.getAttribute("data-shift"))]: (e.target.parentNode.getAttribute("data-date") +" "+ e.target.value), /* actual shift data to go either in start or end hift */
+                        shiftType : (e.target.parentNode.getAttribute("data-shiftType")), /* morning or evening */
+                     
+                        worker :e.target.parentNode.getAttribute("data-id"), /* worker id */
+                       
+                    }
+                    console.log("object?:",jsondata);
+                  }
 
                   const tdcollection = ()  => {
-                    const tdcollection = ReactDOM.findDOMNode(document.getElementById("table-rota").getElementsByTagName("td"));
+                    const node = ReactDOM.findDOMNode(document.getElementById("table-rota"));
+                    const tds = node.getElementsByTagName("td");
+                    const inputfirst = tds[0].getElementsByTagName("input[type='time']");
+                    console.log("tds:",tds[0]);
+                    console.log("inputfisrvalue:", inputfirst.value);
+                  
+                    console.log("object:", inputfirst);
+                  
+
+                  }
+                  const tablerota = ()  => {
+                    const tdlist = ReactDOM.findDOMNode(document.getElementById("table-rota"));
                     
-                    console.log(tdcollection);
+                    console.log(tdlist);
 
                   }
     // const [shift, setShift] = useState(""); 
@@ -209,38 +266,41 @@ function RotaMaker() {
         </div>
      
        
-            <table id="table-rota" className="table table-sm table-bordered text-center my-3">
-            {/* <caption> Rota </caption> */}
-                <thead className="table-dark ">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th colspan="2" scope="col">Monday</th>
-                        <th colspan="2" scope="col">Tuesday</th>
-                        <th colspan="2" scope="col">Wednesday</th>
-                        <th colspan="2" scope="col">Thursday</th>
-                        <th colspan="2" scope="col">Friday</th>
-                        <th colspan="2" scope="col">Saturday</th>
-                        <th colspan="2" scope="col">Sunday</th>
-                    </tr>
-                    <tr>
-                        <th scope="col"></th>
-                        <th colspan="2" scope="col">{("0"+week[0].getDate()).slice(-2)}-{("0" + (week[0].getMonth() + 1)).slice(-2)}</th>
-                        <th colspan="2" scope="col">{("0"+week[1].getDate()).slice(-2)}-{("0" + (week[1].getMonth() + 1)).slice(-2)}</th>
-                        <th colspan="2" scope="col">{("0"+week[2].getDate()).slice(-2)}-{("0" + (week[2].getMonth() + 1)).slice(-2)}</th>
-                        <th colspan="2" scope="col">{("0"+week[3].getDate()).slice(-2)}-{("0" + (week[3].getMonth() + 1)).slice(-2)}</th>
-                        <th colspan="2" scope="col">{("0"+week[4].getDate()).slice(-2)}-{("0" + (week[4].getMonth() + 1)).slice(-2)}</th>
-                        <th colspan="2" scope="col">{("0"+week[5].getDate()).slice(-2)}-{("0" + (week[5].getMonth() + 1)).slice(-2)}</th>
-                        <th colspan="2" scope="col">{("0"+week[6].getDate()).slice(-2)}-{("0" + (week[6].getMonth() + 1)).slice(-2)}</th>
-                   
-                    </tr>
-                </thead>
-                <tbody className="table-hover">
-                    {/* condicion, si hay datos{body} : {} */}
-                   {/*  {body} */}
-                    {bodyCreate}
-                </tbody>
-            </table>
-            <button onClick={()=>{tdcollection()}}>tds</button>
+            <form action=" ">
+                <table id="table-rota" className="table table-sm table-bordered text-center my-3">
+                {/* <caption> Rota </caption> */}
+                    <thead className="table-dark ">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th colspan="1" scope="col">Monday</th>
+                            <th colspan="1" scope="col">Tuesday</th>
+                            <th colspan="1" scope="col">Wednesday</th>
+                            <th colspan="1" scope="col">Thursday</th>
+                            <th colspan="1" scope="col">Friday</th>
+                            <th colspan="1" scope="col">Saturday</th>
+                            <th colspan="1" scope="col">Sunday</th>
+                        </tr>
+                        <tr>
+                            <th scope="col"></th>
+                            <th colspan="1" scope="col">{("0"+week[0].getDate()).slice(-2)}-{("0" + (week[0].getMonth() + 1)).slice(-2)}</th>
+                            <th colspan="1" scope="col">{("0"+week[1].getDate()).slice(-2)}-{("0" + (week[1].getMonth() + 1)).slice(-2)}</th>
+                            <th colspan="1" scope="col">{("0"+week[2].getDate()).slice(-2)}-{("0" + (week[2].getMonth() + 1)).slice(-2)}</th>
+                            <th colspan="1" scope="col">{("0"+week[3].getDate()).slice(-2)}-{("0" + (week[3].getMonth() + 1)).slice(-2)}</th>
+                            <th colspan="1" scope="col">{("0"+week[4].getDate()).slice(-2)}-{("0" + (week[4].getMonth() + 1)).slice(-2)}</th>
+                            <th colspan="1" scope="col">{("0"+week[5].getDate()).slice(-2)}-{("0" + (week[5].getMonth() + 1)).slice(-2)}</th>
+                            <th colspan="1" scope="col">{("0"+week[6].getDate()).slice(-2)}-{("0" + (week[6].getMonth() + 1)).slice(-2)}</th>
+                       
+                        </tr>
+                    </thead>
+                    <tbody className="table-hover">
+                        {/* condicion, si hay datos{body} : {} */}
+                       {/*  {body} */}
+                        {bodyCreate}
+                    </tbody>
+                </table>
+            </form>
+            <button onClick={()=>{tdcollection()}}>get tds</button>
+            <button onClick={()=>{tablerota()}}>tablerota node</button>
         </>
     )
 }

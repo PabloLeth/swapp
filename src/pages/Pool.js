@@ -12,7 +12,7 @@ function Pool() {
   });
 
 
-  const URLPOOL = "http://localhost/symfonyswapp/public/index.php/shift/pool";
+  const URLPOOL = "http://localhost:8000/shift/pool";
 
   useEffect(() => {
     fetch(URLPOOL)

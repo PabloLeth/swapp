@@ -3,7 +3,7 @@ function ShiftList({ data }) {
     return <p>loading...</p>
   }
   let token = localStorage.getItem("token");
-  console.log(typeof token);
+
   const URLSHIFT = "http://localhost:8000/shift/swapping";
   
   const reqOpt = {
