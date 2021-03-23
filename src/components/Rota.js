@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import ModalShift from './ModalShift';
 import BodyRota from './BodyRota';
+import Login from './Login';
 
 function Rota() {
     const dayName = ["#","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
@@ -61,14 +62,23 @@ function Rota() {
     
     useEffect(() => {
 
-        fetch(URLSHIFT,reqOpt)
-    .then(response => response.json())
-    .then(data => {setData(data);console.log(data)})
+    fetch(URLSHIFT,reqOpt)
+    .then(response => {
+        if (response.ok){
+            response.json()
+            .then(data => {setData(data);console.log(data)})
+        }
+        if(response.status==401){
+            alert("Wopa! no estas logueado o no tienes permisos para acceder");
+            
+        }
+    })
+       
     .catch(error => {
-     
-      console.log("ha habido un error:", error)
+     console.log("ha habido un error:", error)
     }); 
-     }, [week]);
+
+    }, [week]);
      
          
                
