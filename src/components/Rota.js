@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import ModalShift from './ModalShift';
 import BodyRota from './BodyRota';
-import Login from './Login';
+import {Redirect, Route} from 'react-router-dom';
+
 
 function Rota() {
     const dayName = ["#","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
@@ -18,7 +19,7 @@ function Rota() {
 
     
     let token = localStorage.getItem("token");
-
+    // let token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MTY0MjgzMDcsImV4cCI6MTYxNjQzMTkwNywicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiYW5pdGFkaW5hbWl0YUBob3RtYWlsLmNvbSJ9.NcUUgJm130Yiknf0StRLj0CIHTAQp1CDFWHFSWzB_lUi3NGlZHUB01r9er5p1i_Ec1p0LwgvUh1im4FsXo85-GJKrW987smTElBkSt0nuAAj2gr_2fEcmwrZC3m_SHWwfypYppBmhfQQvJHHAk9N37jMtxTprKZ1DNN0dou975URJWndnxzhrjCg-eRMtrDMsciIgDp1P05dVi12rKdojdyizI2t2vPOy5FxFo8TgWN0i_N9uNVc9xhC01ySIfF6uHRmF1M1ILUuQ63-0mrDljQIqCbhFMVwhrdQIEXvap2sbgpMnxQ0lUxnulJIYyB_ivv5UPkPximwzlZ5tGxVuQ";
     const URLSHIFT = "http://localhost:8000/shift/rotauser";
     
     const reqOpt = {
@@ -70,7 +71,7 @@ function Rota() {
         }
         if(response.status==401){
             alert("Wopa! no estas logueado o no tienes permisos para acceder");
-            
+           
         }
     })
        
@@ -79,292 +80,7 @@ function Rota() {
     }); 
 
     }, [week]);
-     
-         
-               
-    const rota = [
-        {
-            "startShift": {
-                "date": "2021-03-29 10:00:00.000000",
-                "timezone_type": 3,
-                "timezone": "Europe/Berlin"
-            },
-            "endShift": {
-                "date": "2021-03-29 16:00:00.000000",
-                "timezone_type": 3,
-                "timezone": "Europe/Berlin"
-            },
-            "swapping": false,
-            "swappable": true,
-            "branch": "Málaga",
-            "shiftType": "morning",
-            "worker": "ana",
-            "job": "Waiter",
-            "id": 12
-        },
-        {
-            "startShift": {
-                "date": "2021-03-29 18:00:00.000000",
-                "timezone_type": 3,
-                "timezone": "Europe/Berlin"
-            },
-            "endShift": {
-                "date": "2021-03-29 20:00:00.000000",
-                "timezone_type": 3,
-                "timezone": "Europe/Berlin"
-            },
-            "swapping": false,
-            "swappable": true,
-            "branch": "Málaga",
-            "shiftType": "evening",
-            "worker": "ana",
-            "job": "Waiter",
-            "id": 13
-        },
-        {
-            "startShift": {
-                "date": "2021-03-30 10:00:00.000000",
-                "timezone_type": 3,
-                "timezone": "Europe/Berlin"
-            },
-            "endShift": {
-                "date": "2021-03-30 16:00:00.000000",
-                "timezone_type": 3,
-                "timezone": "Europe/Berlin"
-            },
-            "swapping": false,
-            "swappable": true,
-            "branch": "Málaga",
-            "shiftType": "morning",
-            "worker": "ana",
-            "job": "Waiter",
-            "id": 14
-        },
-        {
-            "startShift": {
-                "date": "2021-03-30 18:00:00.000000",
-                "timezone_type": 3,
-                "timezone": "Europe/Berlin"
-            },
-            "endShift": {
-                "date": "2021-03-30 20:00:00.000000",
-                "timezone_type": 3,
-                "timezone": "Europe/Berlin"
-            },
-            "swapping": false,
-            "swappable": true,
-            "branch": "Málaga",
-            "shiftType": "evening",
-            "worker": "ana",
-            "job": "Waiter",
-            "id": 15
-        },
-        {
-            "startShift": {
-                "date": "2021-03-31 10:00:00.000000",
-                "timezone_type": 3,
-                "timezone": "Europe/Berlin"
-            },
-            "endShift": {
-                "date": "2021-03-31 16:00:00.000000",
-                "timezone_type": 3,
-                "timezone": "Europe/Berlin"
-            },
-            "swapping": false,
-            "swappable": true,
-            "branch": "Málaga",
-            "shiftType": "morning",
-            "worker": "ana",
-            "job": "Waiter",
-            "id": 16
-        },
-        {
-            "startShift": {
-                "date": "2021-03-31 18:00:00.000000",
-                "timezone_type": 3,
-                "timezone": "Europe/Berlin"
-            },
-            "endShift": {
-                "date": "2021-03-31 20:00:00.000000",
-                "timezone_type": 3,
-                "timezone": "Europe/Berlin"
-            },
-            "swapping": false,
-            "swappable": true,
-            "branch": "Málaga",
-            "shiftType": "evening",
-            "worker": "ana",
-            "job": "Waiter",
-            "id": 17
-        },
-        {
-            "startShift": {
-                "date": "2021-04-01 10:00:00.000000",
-                "timezone_type": 3,
-                "timezone": "Europe/Berlin"
-            },
-            "endShift": {
-                "date": "2021-04-01 16:00:00.000000",
-                "timezone_type": 3,
-                "timezone": "Europe/Berlin"
-            },
-            "swapping": false,
-            "swappable": true,
-            "branch": "Málaga",
-            "shiftType": "morning",
-            "worker": "ana",
-            "job": "Waiter",
-            "id": 18
-        },
-        {
-            "startShift": {
-                "date": "2021-04-01 18:00:00.000000",
-                "timezone_type": 3,
-                "timezone": "Europe/Berlin"
-            },
-            "endShift": {
-                "date": "2021-04-01 20:00:00.000000",
-                "timezone_type": 3,
-                "timezone": "Europe/Berlin"
-            },
-            "swapping": false,
-            "swappable": true,
-            "branch": "Málaga",
-            "shiftType": "evening",
-            "worker": "ana",
-            "job": "Waiter",
-            "id": 19
-        },
-        {
-            "startShift": {
-                "date": "2021-04-02 10:00:00.000000",
-                "timezone_type": 3,
-                "timezone": "Europe/Berlin"
-            },
-            "endShift": {
-                "date": "2021-04-02 16:00:00.000000",
-                "timezone_type": 3,
-                "timezone": "Europe/Berlin"
-            },
-            "swapping": false,
-            "swappable": true,
-            "branch": "Málaga",
-            "shiftType": "morning",
-            "worker": "ana",
-            "job": "Waiter",
-            "id": 20
-        },
-        {
-            "startShift": {
-                "date": "2021-04-02 18:00:00.000000",
-                "timezone_type": 3,
-                "timezone": "Europe/Berlin"
-            },
-            "endShift": {
-                "date": "2021-04-02 20:00:00.000000",
-                "timezone_type": 3,
-                "timezone": "Europe/Berlin"
-            },
-            "swapping": false,
-            "swappable": true,
-            "branch": "Málaga",
-            "shiftType": "evening",
-            "worker": "ana",
-            "job": "Waiter",
-            "id": 21
-        },
-        {
-            "startShift": {
-                "date": "2021-04-03 10:00:00.000000",
-                "timezone_type": 3,
-                "timezone": "Europe/Berlin"
-            },
-            "endShift": {
-                "date": "2021-04-03 16:00:00.000000",
-                "timezone_type": 3,
-                "timezone": "Europe/Berlin"
-            },
-            "swapping": false,
-            "swappable": true,
-            "branch": "Málaga",
-            "shiftType": "morning",
-            "worker": "ana",
-            "job": "Waiter",
-            "id": 22
-        },
-        {
-            "startShift": {
-                "date": "2021-04-03 18:00:00.000000",
-                "timezone_type": 3,
-                "timezone": "Europe/Berlin"
-            },
-            "endShift": {
-                "date": "2021-04-03 20:00:00.000000",
-                "timezone_type": 3,
-                "timezone": "Europe/Berlin"
-            },
-            "swapping": false,
-            "swappable": true,
-            "branch": "Málaga",
-            "shiftType": "evening",
-            "worker": "ana",
-            "job": "Waiter",
-            "id": 23
-        },
-        {
-            "startShift": {
-                "date": "2021-04-04 10:00:00.000000",
-                "timezone_type": 3,
-                "timezone": "Europe/Berlin"
-            },
-            "endShift": {
-                "date": "2021-04-04 16:00:00.000000",
-                "timezone_type": 3,
-                "timezone": "Europe/Berlin"
-            },
-            "swapping": false,
-            "swappable": true,
-            "branch": "Málaga",
-            "shiftType": "morning",
-            "worker": "ana",
-            "job": "Waiter",
-            "id": 24
-        },
-        {
-            "startShift": {
-                "date": "2021-04-04 18:00:00.000000",
-                "timezone_type": 3,
-                "timezone": "Europe/Berlin"
-            },
-            "endShift": {
-                "date": "2021-04-04 20:00:00.000000",
-                "timezone_type": 3,
-                "timezone": "Europe/Berlin"
-            },
-            "swapping": false,
-            "swappable": true,
-            "branch": "Málaga",
-            "shiftType": "evening",
-            "worker": "ana",
-            "job": "Waiter",
-            "id": 25
-        }
-    ]
-
-
-    const shiftToPool = (e) => {
-        alert("aqui mandará el detalle del turno con boton empezar proceso de cambio");
-       // e.target.id
-        // setShow(!show);
-
-        //  if (confirm(` confirma que desea deshacerse de este turno ${shift.id}, ${shift.date} `)){
-        //       functionfetchingtoswapping();
-        //       alert("perfecto, tu turno ha ido a la piscina de turnos");
-        //   }
-        //aqui ira una funcion con un fetch para cambiar swapping a true
-    }
-
-   
+  
 
     return (
         <>
