@@ -1,0 +1,13 @@
+.homeback{
+    background-color: blueviolet;
+    height: 100vh;
+    background-size: cover;
+}
+.titulo{
+    position: absolute;
+    width: 600px;
+    height: 300px;
+    margin: 20% 30%;
+    text-align: center;
+    font-family:helvetica,sans-serif;
+}

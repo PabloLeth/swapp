@@ -15,7 +15,7 @@ function RotaMaker() {
       todayWeek.push(day);
     }
     
-    const[turnos, setTurnos] = useState();
+    const[turnos, setTurnos] = useState([]);
 
    const [week, setWeek] = useState(todayWeek);
 
@@ -145,19 +145,67 @@ function RotaMaker() {
         ]
     };
     const dataResponse = [
-        {"name": "antonio ","id": 2},
-        {"name": "DA BOSS","id": 3},
-        {"name": "antonio","id": 4},
-        {"name": "ana","id": 5},
-        {"name": "Raquel","id": 6},
-        {"name": "Belen","id": 7},
-        {"name": "juan","id": 8},
-        {"name": "rocio","id": 9},
-        {"name": "Pedro","id": 10},
-        {"name": "laura","id": 11},
-        {"name": "andrea","id": 12},
-        {"name": "alejandro","id": 13},
-        {"name": "eladio","id": 14}
+       
+        {
+            "worker": "antonio ",
+            "id": 2,
+            "shifts": [
+              {
+                "id": 1,
+                "startShift": {
+                  "date": "2021-03-24 12:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Berlin"
+                },
+                "endShift": {
+                  "date": "2021-03-24 18:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Berlin"
+                },
+                "shiftType": "morning"
+              },
+              {
+                "id": 3,
+                "startShift": {
+                  "date": "2021-03-25 10:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Berlin"
+                },
+                "endShift": {
+                  "date": "2021-03-25 16:00:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Berlin"
+                },
+                "shiftType": "morning"
+              },
+              {
+                "id": 8,
+                "startShift": {
+                  "date": "2021-03-25 17:30:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Berlin"
+                },
+                "endShift": {
+                  "date": "2021-03-25 22:30:00.000000",
+                  "timezone_type": 3,
+                  "timezone": "Europe/Berlin"
+                },
+                "shiftType": "evening"
+              }
+            ]
+          },
+        {"worker": "DA BOSS","id": 3},
+        {"worker": "antonio","id": 4},
+        {"worker": "ana","id": 5},
+        {"worker": "Raquel","id": 6},
+        {"worker": "Belen","id": 7},
+        {"worker": "juan","id": 8},
+        {"worker": "rocio","id": 9},
+        {"worker": "Pedro","id": 10},
+        {"worker": "laura","id": 11},
+        {"worker": "andrea","id": 12},
+        {"worker": "alejandro","id": 13},
+        {"worker": "eladio","id": 14}
       ]
      
     const bodyCreate = 
@@ -166,31 +214,60 @@ function RotaMaker() {
             shfitType.map(type => {
                 let cabecera ="";
                 if (type=="morning"){ /* para poner cabecera con nombre en mañana y tarde por rowspan */
-                     cabecera =  <th className="table-dark" rowspan="2" id={worker.id} >{worker.id}, {worker.name}</th>;
+                     cabecera =  <th className="table-dark" rowspan="2" id={worker.id} >{worker.id}, {worker.worker}</th>;
                 } 
                 return (
                 <tr>
                 { cabecera }
                 {week.map(day=> {
                     let datestr = day.toISOString().slice(0, 10);
-                 
+                    if( worker.shifts){
+                       
+                   
+                        let conditionShift = worker.shifts.filter(shift=> shift.shiftType == type && new Date(shift.startShift.date).toISOString().slice(0, 10) == datestr);
+                    
+
+                   if  (conditionShift[0]){
+                       console.log("condition shift:",conditionShift);
+                       return( <>
+                        <td data-shiftid={conditionShift.id}>
+                      
+                        { ("0" + (new Date(conditionShift[0].startShift.date).getHours())).slice(-2)}:{("0" + (new Date(conditionShift[0].startShift.date).getMinutes())).slice(-2)} /
+                        { ("0" + (new Date(conditionShift[0].endShift.date).getHours())).slice(-2)}:{("0" + (new Date(conditionShift[0].endShift.date).getMinutes())).slice(-2)}
+    
+                        </td>
+                        </>)
+                   
+                   }else{
+
                    return ( <>
-                    <td data-shiftType={type} data-date={datestr} data-id={worker.id}>
+                    <td data-shiftType={type} data-date={datestr} data-wid={worker.id}>
                         <input data-shift="startShift" type="time" required onChange={(e)=>{getValue(e)}}/>
                    
                         <input data-shift="endShift" type="time" required onChange={(e)=>{getValue(e)}}/>
 
                     </td>
                     </>)
+                } 
+                } else{
+
+                    return ( <>
+                     <td data-shiftType={type} data-date={datestr} data-wid={worker.id}>
+                         <input data-shift="startShift" type="time" required onChange={(e)=>{getValue(e)}}/>
                     
-                  
+                         <input data-shift="endShift" type="time" required onChange={(e)=>{getValue(e)}}/>
+ 
+                     </td>
+                     </>)
+                 } 
                   })}
                   </tr>
                 )}
                 
             )
-        )}
+            )}
          </>;
+         
                   const getValue= (e) =>{
                       console.log("target:",e.target);
                       console.log(e.target);
@@ -229,30 +306,7 @@ function RotaMaker() {
     //     setShift(e.target.value);
     // }
 
-    const body = data.data.map(worker =>
-        <>
-            <tr>
-                <th rowspan="2" scope="rowgroup" className="table-warning">{worker.name}</th>
-                {worker.shifts.map(shift =>
-                    (shift.shift_type == "MORNING") ?
-                        <td key={shift.shift_id} className="table-success" >
-
-                            <p>{shift.start_shift.substr(11, 5)}~{shift.end_shift.substr(11, 5)}</p>
-
-                        </td>
-                        :
-                        <td key={shift.shift_id} className="table-success" >
-
-                            <p></p>
-
-                        </td>
-                )}
-            </tr>
-
-        </>
-
-
-    )
+   
 
     return (
         <>
