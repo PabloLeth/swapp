@@ -211,7 +211,7 @@ function RotaMaker() {
      
     const bodyCreate = 
         <> {dataResponse.map(worker =>
-          <Weekshifts worker= {worker} week= {week} setShifts/>
+          <Weekshifts worker= {worker} week= {week} setShifts = {setShifts}/>
           )}
         </>;
    
