@@ -10,6 +10,7 @@ function Pool() {
     error: null,
     isLoading: true
   });
+  const[filteredData, setFilteredData]=useState(data);
 
 
   const URLPOOL = "http://localhost:8000/shift/pool";
@@ -38,8 +39,9 @@ function Pool() {
 
       <div className="container">
         <p>este es el Pool donde aparecen los turnos que se van a cambiar con otros usuarios</p>
-        <SearchShifts />
-        <ShiftList data={data} />
+        {isLoading ?<ShiftList data={filteredData}/> :  <SearchShifts setFilteredData = {setFilteredData} data = {data}/> }
+       
+        <ShiftList data={filteredData}/>
          
       </div>
     </>

@@ -1,4 +1,5 @@
-function ShiftList({ data }) {
+import swal from 'sweetalert';
+function ShiftList({ data}) {
   if (!data) {
     return <p>loading...</p>
   }
@@ -14,15 +15,36 @@ function ShiftList({ data }) {
     body: JSON.stringify({swapping : 0 })
    
 };
+const swappingFetch = (id) =>{
+  fetch(`${URLSHIFT}/${id}`,reqOpt)
+  .then(response => response.json())
+  .then(data => {
+    console.log(data.answer);
+    // dispatch({ data, error: null, isLoading: false }); necesito filtrar la data para hacer un pop por el id
+  }
+  ).catch(error => {
+    console.log("ha habido un error:", error)
+  });
+}
  const takeShift= (id) => {
    
-    fetch(`${URLSHIFT}/${id}`,reqOpt)
-    .then(response => response.json())
-    .then(data => {console.log(data.answer)}
-
-    ).catch(error => {
-     
-      console.log("ha habido un error:", error)
+    swal({
+      title: "Are you a 100% sure?",
+      text: "Once you take the shift, you will have to call your boss to explain it!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willSend) => {
+      if (willSend) {
+          /* meter un fetch a http://localhost:8000/shift/swapping/${e.target.id} */
+          swappingFetch(id);
+        swal("Boom! thats your shift now!", {
+          icon: "success",
+        });
+      } else {
+        swal("are you still looking for more work?!");
+      }
     });
   }
   return (

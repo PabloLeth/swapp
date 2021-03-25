@@ -16,7 +16,7 @@ function RotaMaker() {
       todayWeek.push(day);
     }
     
-    const[shifts, setShifts] = useState([]);
+    const[shifts, setShifts] = useState([ ]);
 
    const [week, setWeek] = useState(todayWeek);
 
@@ -223,12 +223,16 @@ function RotaMaker() {
     return (
         <>
         <div className="container row justify-content-around ">
-            <input type="button" value="semana anterior"onClick={()=>{handleprev()}}  />
+            <div  className="d-flex justify-content-center align-items-end">
+                <input type="button" value="semana anterior"onClick={()=>{handleprev()}}  />
+            </div>
             <div className="text-center" >
                 <h1>{week[0].getFullYear()}</h1>
                 <h3>semana del {week[0].getDate()} de {month[week[0].getMonth()]} al {week[6].getDate()} de {month[week[6].getMonth()]}</h3>
             </div>
+            <div  className="d-flex justify-content-center align-items-end">
             <input type="button" value="semana proxima" onClick={()=>{handlenext()}}/>
+            </div>
         </div>
      
        

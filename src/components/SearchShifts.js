@@ -1,6 +1,6 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
-function SearchShifts() {
+function SearchShifts({ setFilteredData , data }) {
     const [search, setSearch] = useState("");
 
    const handleSubmit = (e) =>{
@@ -8,6 +8,12 @@ function SearchShifts() {
 
     setSearch("");
    }
+   useEffect(() => {
+    const results = data.filter(data =>
+      data.branch.toLowerCase().includes(search)
+    );
+    setFilteredData(results);
+  }, [search]);
     return (
       <>
      

@@ -14,6 +14,7 @@ function Weekshifts({worker, week, setShifts}) {
           worker : e.target.parentNode.getAttribute("data-wid"), /* worker id */
           
       }
+     
       console.log("object?:",jsondata);
       /* necesita cambiar solo en el que le corresponda */
     //   setShifts(prev => [...prev,{jsondata}]);
@@ -23,6 +24,7 @@ function Weekshifts({worker, week, setShifts}) {
     
     //   setTheObject(prev => ({...prev, [name]: value }));
     }
+ 
 
     return (
         <>
@@ -33,22 +35,23 @@ function Weekshifts({worker, week, setShifts}) {
                     cabecera = <th className="table-dark" rowspan="2" id={worker.id} >{worker.id}, {worker.worker}</th>;
                 }
                 return (
-                    <tr>
+                    <tr> 
+                       
                         { cabecera}
                         {week.map((day, index) => {
                             let datestr = day.toISOString().slice(0, 10);
                             if (worker.shifts) {
-
+                                    /* si tiene shifts en los datos que el back nos devuelve: */
                                 
                                
                                 let conditionShift = worker.shifts.filter(shift => shift.shiftType == type && new Date(shift.startShift.date).toISOString().slice(0, 10) == datestr);
-
+                                    /* condicion para saber si hay datos de la base de datos para rango de (mañ/tard) que estemos y la fecha en el trabajador en el que estamos */
 
                                 if (conditionShift[0]) {
                                     
                                     return (<>
                                         <td data-shiftid={conditionShift.id}>
-
+                                                {/* quizas mejor en un <i> o algo asi */}
                                             {("0" + (new Date(conditionShift[0].startShift.date).getHours())).slice(-2)}:{("0" + (new Date(conditionShift[0].startShift.date).getMinutes())).slice(-2)} /
                                             {("0" + (new Date(conditionShift[0].endShift.date).getHours())).slice(-2)}:{("0" + (new Date(conditionShift[0].endShift.date).getMinutes())).slice(-2)}
 
@@ -56,7 +59,7 @@ function Weekshifts({worker, week, setShifts}) {
                                     </>)
 
                                 } else {
-
+                                            /* si no lo encuentra pintará un input */
                                     return (<>
                                         <td data-shiftType={type} data-date={datestr} data-wid={wid} id={index}>
                                             <input data-shift="startShift" type="time" required onChange={(e) => { getValue(e) }} />
@@ -74,9 +77,11 @@ function Weekshifts({worker, week, setShifts}) {
 
                                         <input data-shift="endShift" type="time" required onChange={(e) => { getValue(e) }} />
                                         {/* {
-                            setShifts(shifts => [...shifts,{date : datestr , shiftType : type, startShift : null, endShift : null, worker : worker }])
-                         } */}
-
+                            setShifts(shifts => [...shifts,{date : datestr , shiftType : type, startShift : null, endShift : null, worker : worker.id }])
+                         }  //esto genera un error porque se actualiza con cada set por lo que comienza de nuevo generando un bucle infinito
+                            //debo crear el estado inicial del useState y despues acceder a el para hacer cambios
+                          */}
+                              
                                     </td>
                                 </>)
                             }
