@@ -31,17 +31,19 @@ function Pool() {
 
   }, []);
 
-  // if (isLoading) return <Card />;
-  // if (error) return <Card error={error} />;
-  // // return <Card props={data} />
+ 
   return (
     <>
 
       <div className="container">
         <p>este es el Pool donde aparecen los turnos que se van a cambiar con otros usuarios</p>
-        {isLoading ?<ShiftList data={filteredData}/> :  <SearchShifts setFilteredData = {setFilteredData} data = {data}/> }
+        {isLoading ? <ShiftList data={filteredData}/> :  <SearchShifts setFilteredData = {setFilteredData} data = {data}/> }
        
-        <ShiftList data={filteredData}/>
+        <div className="container">
+          <div className="row d-flex justify-content-around">
+            <ShiftList data={filteredData}/>
+          </div>
+        </div>
          
       </div>
     </>

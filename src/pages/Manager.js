@@ -7,8 +7,8 @@ function Manager() {
      
       <div>
         <h1>Perfil Manager</h1>
-       <p>Esto es el perfil de manager solo accesible por el manager</p>
-<RotaMaker />
+        <p>Esto es el perfil de manager solo accesible por el manager</p>
+        <RotaMaker />
 {/* <Register /> */}
 
       </div>

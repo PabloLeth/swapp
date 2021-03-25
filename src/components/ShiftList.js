@@ -56,7 +56,7 @@ const swappingFetch = (id) =>{
             data.map(({ worker, branch, shiftType, startShift, endShift, job, id }) => {
 
               return (
-                <div className="col-sm-3">
+                <div className="col-sm-4">
                 <div className="card text-center mx-2 my-3">
                   <div className="card-body">
                     <h3 className="card-title">id: {id}</h3>

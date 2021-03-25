@@ -1,10 +1,72 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import Weekshifts from './Weekshifts';
 function RotaMaker() {
-   
+  const dataResponse = [
+       
+    {
+        "worker": "antonio ",
+        "id": 2,
+        "shifts": [
+          {
+            "id": 1,
+            "startShift": {
+              "date": "2021-03-24 12:00:00.000000",
+              "timezone_type": 3,
+              "timezone": "Europe/Berlin"
+            },
+            "endShift": {
+              "date": "2021-03-24 18:00:00.000000",
+              "timezone_type": 3,
+              "timezone": "Europe/Berlin"
+            },
+            "shiftType": "morning"
+          },
+          {
+            "id": 3,
+            "startShift": {
+              "date": "2021-03-25 10:00:00.000000",
+              "timezone_type": 3,
+              "timezone": "Europe/Berlin"
+            },
+            "endShift": {
+              "date": "2021-03-25 16:00:00.000000",
+              "timezone_type": 3,
+              "timezone": "Europe/Berlin"
+            },
+            "shiftType": "morning"
+          },
+          {
+            "id": 8,
+            "startShift": {
+              "date": "2021-03-25 17:30:00.000000",
+              "timezone_type": 3,
+              "timezone": "Europe/Berlin"
+            },
+            "endShift": {
+              "date": "2021-03-25 22:30:00.000000",
+              "timezone_type": 3,
+              "timezone": "Europe/Berlin"
+            },
+            "shiftType": "evening"
+          }
+        ]
+      },
+    {"worker": "DA BOSS","id": 3},
+    {"worker": "antonio","id": 4},
+    {"worker": "ana","id": 5},
+    {"worker": "Raquel","id": 6},
+    {"worker": "Belen","id": 7},
+    {"worker": "juan","id": 8},
+    {"worker": "rocio","id": 9},
+    {"worker": "Pedro","id": 10},
+    {"worker": "laura","id": 11},
+    {"worker": "andrea","id": 12},
+    {"worker": "alejandro","id": 13},
+    {"worker": "eladio","id": 14}
+  ]
                      // const week = ["#","Monday","Tuesday","Wednesday","Friday","Saturday","Sunday"];
-    const shfitType = ["morning", "evening"]; /* necesito cambiarlo por 0 y 1 para el back */
+    const shfitType = ["morning", "evening"]; /* necesito cambiarlo por 2 y 1 para el back? */
     const month = ["Enero", "Febrero", "Marzo", "Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
     const today = new Date;
     let token = localStorage.getItem("token");
@@ -15,20 +77,20 @@ function RotaMaker() {
       let day = new Date(today.setDate(first));
       todayWeek.push(day);
     }
-    
-    const[shifts, setShifts] = useState([ ]);
+    // const[dataResponse, setDataResponse]= useState([]);
+    const[shifts, setShifts] = useState(dataResponse);
 
    const [week, setWeek] = useState(todayWeek);
 
    function getDataWeek(){
-    const URLROTA = "http://localhost:8000/manager/rotacheck";
+    const URLROTA = "http://localhost:8000/shift/manager/rotacheck";
   
     const reqOpt = {
       method: 'POST',
       headers: { 'Content-Type' : 'application/json',
                  Authorization : `Bearer ${token}`
                 },
-      body: JSON.stringify({dateFromjsn :(week[0].toISOString().slice(0, 10)), dateFromjsn: (week[6].toISOString().slice(0, 10)) })
+      body: JSON.stringify({dateFromjsn :(week[0].toISOString().slice(0, 10)), dateTojsn: (week[6].toISOString().slice(0, 10)) })
      
     };
   
@@ -39,13 +101,19 @@ function RotaMaker() {
             /* hace falta este if? */
         };
           response.json() })
-      .then(data => {console.log(data.answer)}
-  
+      .then(data => {
+        console.log(data.answer);
+        // setDataResponse(data);
+      }
+
       ).catch(error => {
        console.log("ha habido un error:", error)
       });
    }
-
+useEffect(() => {
+  getDataWeek();
+ 
+}, [week]);
    function handlenext(){
     nextWeek();
     
@@ -76,142 +144,12 @@ function RotaMaker() {
     return setWeek(weekResult);
   }
 
-    const data = {
-        "data": [
-            {
-                "name": "Pablo",
-                "shifts": [
-                    {
-                        "shift_id": 1,
-                        "shift_type": "MORNING",
-                        "start_shift": "2021-02-10 10:01",
-                        "end_shift": "2021-02-10 12:01"
-                    },
-                    {
-                        "shift_id": 2,
-                        "shift_type": "EVENING",
-                        "start_shift": "2021-02-10 16:01",
-                        "end_shift": "2021-02-10 20:01"
-                    },
-                    {
-                        "shift_id": 3,
-                        "shift_type": "EVENING",
-                        "start_shift": "2021-02-11 16:02",
-                        "end_shift": "2021-02-11 20:02"
-                    },
-                    {
-                        "shift_id": 4,
-                        "shift_type": "OFF",
-                        "start_shift": "2021-02-12",
-                        "end_shift": "2021-02-12"
-                    },
-                    {
-                        "shift_id": 5,
-                        "shift_type": "EVENING",
-                        "start_shift": "2021-02-13 18:00",
-                        "end_shift": "2021-02-13 20:00"
-                    },
-                    {
-                        "shift_id": 6,
-                        "shift_type": "OFF",
-                        "start_shift": "2021-02-14",
-                        "end_shift": "2021-02-14"
-                    },
-                    {
-                        "shift_id": 7,
-                        "shift_type": "MORNING",
-                        "start_shift": "2021-02-15 10:00",
-                        "end_shift": "2021-02-15 12:00"
-                    },
-                    {
-                        "shift_id": 8,
-                        "shift_type": "EVENING",
-                        "start_shift": "2021-02-15 10:00",
-                        "end_shift": "2021-02-15 12:00"
-                    },
-                    {
-                        "shift_id": 9,
-                        "shift_type": "EVENING",
-                        "start_shift": "2021-02-16 16:00",
-                        "end_shift": "2021-02-16 20:00"
-                    },
-                    {
-                        "shift_id": 10,
-                        "shift_type": "OFF",
-                        "start_shift": "2021-02-12",
-                        "end_shift": "2021-02-12"
-                    }
-                ]
-            }
-        ]
-    };
-    const dataResponse = [
-       
-        {
-            "worker": "antonio ",
-            "id": 2,
-            "shifts": [
-              {
-                "id": 1,
-                "startShift": {
-                  "date": "2021-03-24 12:00:00.000000",
-                  "timezone_type": 3,
-                  "timezone": "Europe/Berlin"
-                },
-                "endShift": {
-                  "date": "2021-03-24 18:00:00.000000",
-                  "timezone_type": 3,
-                  "timezone": "Europe/Berlin"
-                },
-                "shiftType": "morning"
-              },
-              {
-                "id": 3,
-                "startShift": {
-                  "date": "2021-03-25 10:00:00.000000",
-                  "timezone_type": 3,
-                  "timezone": "Europe/Berlin"
-                },
-                "endShift": {
-                  "date": "2021-03-25 16:00:00.000000",
-                  "timezone_type": 3,
-                  "timezone": "Europe/Berlin"
-                },
-                "shiftType": "morning"
-              },
-              {
-                "id": 8,
-                "startShift": {
-                  "date": "2021-03-25 17:30:00.000000",
-                  "timezone_type": 3,
-                  "timezone": "Europe/Berlin"
-                },
-                "endShift": {
-                  "date": "2021-03-25 22:30:00.000000",
-                  "timezone_type": 3,
-                  "timezone": "Europe/Berlin"
-                },
-                "shiftType": "evening"
-              }
-            ]
-          },
-        {"worker": "DA BOSS","id": 3},
-        {"worker": "antonio","id": 4},
-        {"worker": "ana","id": 5},
-        {"worker": "Raquel","id": 6},
-        {"worker": "Belen","id": 7},
-        {"worker": "juan","id": 8},
-        {"worker": "rocio","id": 9},
-        {"worker": "Pedro","id": 10},
-        {"worker": "laura","id": 11},
-        {"worker": "andrea","id": 12},
-        {"worker": "alejandro","id": 13},
-        {"worker": "eladio","id": 14}
-      ]
+
+    
      
     const bodyCreate = 
         <> {dataResponse.map(worker =>
-          <Weekshifts worker= {worker} week= {week} setShifts = {setShifts}/>
+          <Weekshifts worker= {worker} week= {week} setShifts = {setShifts} shifts = {shifts}/>
           )}
         </>;
    
