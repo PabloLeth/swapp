@@ -2,69 +2,7 @@ import { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import Weekshifts from './Weekshifts';
 function RotaMaker() {
-  const dataResponse = [
-       
-    {
-        "worker": "antonio ",
-        "id": 2,
-        "shifts": [
-          {
-            "id": 1,
-            "startShift": {
-              "date": "2021-03-24 12:00:00.000000",
-              "timezone_type": 3,
-              "timezone": "Europe/Berlin"
-            },
-            "endShift": {
-              "date": "2021-03-24 18:00:00.000000",
-              "timezone_type": 3,
-              "timezone": "Europe/Berlin"
-            },
-            "shiftType": "morning"
-          },
-          {
-            "id": 3,
-            "startShift": {
-              "date": "2021-03-25 10:00:00.000000",
-              "timezone_type": 3,
-              "timezone": "Europe/Berlin"
-            },
-            "endShift": {
-              "date": "2021-03-25 16:00:00.000000",
-              "timezone_type": 3,
-              "timezone": "Europe/Berlin"
-            },
-            "shiftType": "morning"
-          },
-          {
-            "id": 8,
-            "startShift": {
-              "date": "2021-03-25 17:30:00.000000",
-              "timezone_type": 3,
-              "timezone": "Europe/Berlin"
-            },
-            "endShift": {
-              "date": "2021-03-25 22:30:00.000000",
-              "timezone_type": 3,
-              "timezone": "Europe/Berlin"
-            },
-            "shiftType": "evening"
-          }
-        ]
-      },
-    {"worker": "DA BOSS","id": 3},
-    {"worker": "antonio","id": 4},
-    {"worker": "ana","id": 5},
-    {"worker": "Raquel","id": 6},
-    {"worker": "Belen","id": 7},
-    {"worker": "juan","id": 8},
-    {"worker": "rocio","id": 9},
-    {"worker": "Pedro","id": 10},
-    {"worker": "laura","id": 11},
-    {"worker": "andrea","id": 12},
-    {"worker": "alejandro","id": 13},
-    {"worker": "eladio","id": 14}
-  ]
+  const dataResponse = [{"worker":"antonio ","id":2,"shifts":[]},{"worker":"DA BOSS","id":3,"shifts":[]},{"worker":"antonio","id":4,"shifts":[]},{"worker":"ana","id":5,"shifts":[{"id":12,"date":{"date":"2021-03-29 00:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"startShift":{"date":"2021-03-29 10:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"endShift":{"date":"2021-03-29 16:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"shiftType":"morning","active":true},{"id":13,"date":{"date":"2021-03-29 00:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"startShift":{"date":"2021-03-29 18:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"endShift":{"date":"2021-03-29 20:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"shiftType":"evening","active":true},{"id":14,"date":{"date":"2021-03-30 00:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"startShift":{"date":"2021-03-30 10:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"endShift":{"date":"2021-03-30 16:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"shiftType":"morning","active":true},{"id":15,"date":{"date":"2021-03-30 00:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"startShift":{"date":"2021-03-30 18:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"endShift":{"date":"2021-03-30 20:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"shiftType":"evening","active":true},{"id":16,"date":{"date":"2021-03-31 00:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"startShift":{"date":"2021-03-31 10:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"endShift":{"date":"2021-03-31 16:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"shiftType":"morning","active":true},{"id":17,"date":{"date":"2021-03-31 00:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"startShift":{"date":"2021-03-31 18:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"endShift":{"date":"2021-03-31 20:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"shiftType":"evening","active":true},{"id":18,"date":{"date":"2021-04-01 00:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"startShift":{"date":"2021-04-01 10:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"endShift":{"date":"2021-04-01 16:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"shiftType":"morning","active":true},{"id":19,"date":{"date":"2021-04-01 00:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"startShift":{"date":"2021-04-01 18:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"endShift":{"date":"2021-04-01 20:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"shiftType":"evening","active":true},{"id":20,"date":{"date":"2021-04-02 00:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"startShift":{"date":"2021-04-02 10:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"endShift":{"date":"2021-04-02 16:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"shiftType":"morning","active":true},{"id":21,"date":{"date":"2021-04-02 00:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"startShift":{"date":"2021-04-02 18:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"endShift":{"date":"2021-04-02 20:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"shiftType":"evening","active":true},{"id":22,"date":{"date":"2021-04-03 00:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"startShift":{"date":"2021-04-03 10:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"endShift":{"date":"2021-04-03 16:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"shiftType":"morning","active":true},{"id":23,"date":{"date":"2021-04-03 00:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"startShift":{"date":"2021-04-03 18:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"endShift":{"date":"2021-04-03 20:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"shiftType":"evening","active":true},{"id":24,"date":{"date":"2021-04-04 00:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"startShift":{"date":"2021-04-04 10:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"endShift":{"date":"2021-04-04 16:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"shiftType":"morning","active":true},{"id":25,"date":{"date":"2021-04-04 00:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"startShift":{"date":"2021-04-04 18:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"endShift":{"date":"2021-04-04 20:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"shiftType":"evening","active":true}]},{"worker":"Raquel","id":6,"shifts":[]},{"worker":"Belen","id":7,"shifts":[]},{"worker":"juan","id":8,"shifts":[]},{"worker":"rocio","id":9,"shifts":[]},{"worker":"Pedro","id":10,"shifts":[]},{"worker":"laura","id":11,"shifts":[]},{"worker":"andrea","id":12,"shifts":[]},{"worker":"alejandro","id":13,"shifts":[]},{"worker":"eladio","id":14,"shifts":[]}]
                      // const week = ["#","Monday","Tuesday","Wednesday","Friday","Saturday","Sunday"];
     const shfitType = ["morning", "evening"]; /* necesito cambiarlo por 2 y 1 para el back? */
     const month = ["Enero", "Febrero", "Marzo", "Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
@@ -154,7 +92,7 @@ useEffect(() => {
         </>;
    
     const muestrashifts = () =>{
-        console.log(shifts);
+        console.log("turnos",shifts);
     }
   
 
