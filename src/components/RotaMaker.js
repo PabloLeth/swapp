@@ -86,9 +86,7 @@ useEffect(() => {
     
      
     const bodyCreate = 
-        <> {dataResponse.map(worker =>
-          <Weekshifts worker= {worker} week= {week} setShifts = {setShifts} shifts = {shifts}/>
-          )}
+        <> 
         </>;
    
     const muestrashifts = () =>{
@@ -141,7 +139,9 @@ useEffect(() => {
                     <tbody className="table-hover">
                         {/* condicion, si hay datos{body} : {} */}
                        {/*  {body} */}
-                        {bodyCreate}
+                       {dataResponse.map(worker =>
+                     <Weekshifts worker= {worker} week= {week} setShifts = {setShifts} shifts = {shifts}/>
+                      )}
                     </tbody>
                 </table>
             </form>

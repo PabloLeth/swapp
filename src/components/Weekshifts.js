@@ -1,47 +1,101 @@
 import React, { useState, useContext } from 'react';
 function Weekshifts({worker, week, setShifts, shifts}) {
-    const [active, setActive] = useState(true);
-    const toggleInput = (e) =>{
-        console.log("change");
-      
-    }
-    
 
     const shfitType = ["morning", "evening"]; /* necesito cambiarlo por 0 y 1 para el back */
  
-    const updateWorkerInDataResponse = (allShifts, newWorker) =>{
-        return allShifts.map( worker=> worker.id==newWorker.id?newWorker:worker)
+    const updateWorkerInDataResponse = (shifts, newWorker) =>{
+        return shifts.map( worker=> worker.id==newWorker.id?newWorker:worker)
     }
-const updateShiftInWorker = (alreadyShift , workerObj) =>{
+const updateShiftInWorker = (existingShift , workerObj) =>{
+   
     workerObj.shifts = workerObj.shifts.map( shift =>{
-       let found = shift.shiftType == alreadyShift.shiftType && typeof shift.startShift == "string" && shift.startShift.substring(0, 10) == alreadyShift.startShift.substring(0, 10);
-  
-       return found ? alreadyShift : shift
+       let found = shift.shiftType == existingShift.shiftType
+                && existingShift.date
+                && typeof shift.date == "string"
+                && shift.date.substring(0, 10) == existingShift.date.substring(0, 10) 
+                ;
+        console.log(found);
+       return found ? existingShift : shift
     })
 
     return workerObj
 }
-    const getStartValue= (e, startOrEnd, type, datestr, wid, index) =>{
+const existAnyShift = (workerObj,type,datestr) =>{
+    let existingShift = workerObj.shifts.find(shift => 
+        shift.shiftType == type
+     && typeof shift.date =="string" 
+     && shift.date.substring(0, 10) == datestr);
+     return existingShift;
+}
+const existEndShift = (workerObj,type,datestr) =>{
+    let existingEndShift = workerObj.shifts.find(shift => 
+        shift.shiftType == type 
+        && typeof shift.endShift =="string" 
+        && shift.endShift.substring(0, 10) == datestr);
+         return existingEndShift;
+}
+    const existStartShift = (workerObj,type,datestr) =>{
+        let existingStartShift = workerObj.shifts?.find(shift => 
+            shift.shiftType == type
+             && typeof shift.startShift == "string" 
+             && shift.startShift.substring(0, 10) == datestr); 
+        return existingStartShift;
+    }
+
+    const toggleInput = (e, type, datestr, wid) =>{
+       
+            let workerObj = shifts.find(w =>{return w.id == wid }); 
+            let existingShift = existAnyShift(workerObj,type,datestr);
+                
+            if (existingShift && existingShift.active == false){
+                //introducir aqui el codigo para grabar los datos que existan en los inputs de haberlos
+                existingShift = {shiftType: type, date : datestr, startShift: (datestr +" "+ e.target.children[0].value), endShift: (datestr +" "+ e.target.children[1].value), active : true };
+                console.log("esta Off",e.target);
+                                
+                workerObj = updateShiftInWorker(existingShift, workerObj);
+            }
+           else if(existingShift){
+               
+                existingShift = {shiftType: type, date : datestr, active : false };
+                
+                workerObj = updateShiftInWorker(existingShift, workerObj);
+    
+            }else{
+                workerObj.shifts.push({
+                    date : datestr,
+                    shiftType: type,
+                    active : false
+                })
+            }
+            let newDataResponse = updateWorkerInDataResponse(shifts, workerObj)
+            
+            setShifts(newDataResponse);
+         
+
+    }
+    
+
+    const getStartValue= (e, type, datestr, wid) =>{
       
-        console.log("getStartValue.wid",wid)
-        if(!e.target.value) {
-            return;
-        }
+        if(!e.target.value){return;}
         
         let workerObj = shifts.find(w =>{return w.id==wid }); 
-     
-        let alreadyShift = workerObj.shifts.find(shift => shift.shiftType == type && typeof shift.endShift =="string" && shift.endShift.substring(0, 10) == datestr); 
-        if(alreadyShift){
+        let existingEndShift = existEndShift(workerObj,type,datestr);
+        let existingStartShift = existStartShift(workerObj,type,datestr);
+        if(existingEndShift){
 
-            alreadyShift = {...alreadyShift, startShift:  (e.target.parentNode.getAttribute("data-date") +" "+ e.target.value) }
-            
-            workerObj = updateShiftInWorker(alreadyShift, workerObj);
-
-        }else{
+            existingEndShift = {...existingEndShift, startShift: (datestr +" "+ e.target.value), active : true }
+            workerObj = updateShiftInWorker(existingEndShift, workerObj);
+          
+        }else if (existingStartShift){
+            existingStartShift = {...existingStartShift, startShift:  (datestr +" "+ e.target.value) }
+            workerObj = updateShiftInWorker(existingStartShift, workerObj);
+          
+            } else{
             workerObj.shifts.push({
-                date : e.target.parentNode.getAttribute("data-date"),
+                date : datestr,
                 shiftType: type,
-                startShift:  (e.target.parentNode.getAttribute("data-date") +" "+ e.target.value),
+                startShift: (datestr+" "+ e.target.value),
             })
         }
         let newDataResponse = updateWorkerInDataResponse(shifts, workerObj)
@@ -51,28 +105,34 @@ const updateShiftInWorker = (alreadyShift , workerObj) =>{
    
     }
 
-    const getEndValue= (e, startOrEnd, type, datestr, wid, index) =>{
+    const getEndValue= (e, type, datestr, wid) =>{
        
         if(!e.target.value) {
             return;
         }
         
-        let work = shifts.find(w =>{return w.id==wid })
-        let alreadyShift = work.shifts?.find(shift => shift.shiftType == type && typeof shift.startShift == "string" && shift.startShift.substring(0, 10) == datestr); 
-        if(alreadyShift){
+        let workerObj = shifts.find(w =>{return w.id==wid });
 
-            alreadyShift = {...alreadyShift, endShift:  (e.target.parentNode.getAttribute("data-date") +" "+ e.target.value) }
-            console.log("alreadyshift",alreadyShift);
-            work = updateShiftInWorker(alreadyShift, work);
-            console.log(work);
+        let existingEndShift = existEndShift(workerObj,type,datestr);
+        let existingStartShift = existStartShift(workerObj,type, datestr);
+
+        if(existingStartShift){
+
+            existingStartShift = {...existingStartShift, endShift:  (datestr +" "+ e.target.value), active : true }
+            workerObj = updateShiftInWorker(existingStartShift, workerObj);
+        }else if (existingEndShift){
+            existingEndShift = {...existingEndShift, endShift:  (datestr +" "+ e.target.value) }
+            workerObj = updateShiftInWorker(existingEndShift, workerObj);
+           console.log("pasa por aqui?");
+            
         }else{
-            work.shifts.push({
+            workerObj.shifts.push({
                 shiftType: type,
-                endShift:  (e.target.parentNode.getAttribute("data-date") +" "+ e.target.value)
+                endShift:  (datestr +" "+ e.target.value)
             })
         }
-        let newDataResponse = updateWorkerInDataResponse(shifts, work)
-        console.log({work, newDataResponse});
+        let newDataResponse = updateWorkerInDataResponse(shifts, workerObj)
+        // console.log({workerObj, newDataResponse});
         setShifts(newDataResponse);
      
   
@@ -105,7 +165,7 @@ const updateShiftInWorker = (alreadyShift , workerObj) =>{
                                     
                                     return (<>
                                         <td data-shiftid={conditionShift.id}>
-                                                {/* quizas mejor en un <i> o algo asi */}
+                                              
                                             {("0" + (new Date(conditionShift[0].startShift.date).getHours())).slice(-2)}:{("0" + (new Date(conditionShift[0].startShift.date).getMinutes())).slice(-2)} /
                                             {("0" + (new Date(conditionShift[0].endShift.date).getHours())).slice(-2)}:{("0" + (new Date(conditionShift[0].endShift.date).getMinutes())).slice(-2)}
 
@@ -113,17 +173,17 @@ const updateShiftInWorker = (alreadyShift , workerObj) =>{
                                     </>)
 
                                 } else {
-                                            /* si no lo encuentra pintará un input */
+                                           
                                     return (<>
-                                        <td data-shiftType={type} data-date={datestr} data-wid={wid} id={index} onDoubleClick={(e)=>{toggleInput(e)}}>
-                                            <div className="">
-                                                <input data-shift="startShift"type="time"required onBlur={(e) => { getStartValue(e, 'startShift', type, datestr, wid, index) }} />
-                                                <input data-shift="endShift" type="time" required onBlur={(e) => { getEndValue(e, 'endShift', type, datestr, wid, index) }} />
-                                            </div >
+                                        <td data-shiftType={type} data-date={datestr} data-wid={wid} id={index} onDoubleClick={(e)=>{toggleInput(e, type, datestr, wid)}}>
+                                            {/* <div className=""> */}
+                                                <input data-shift="startShift"type="time"required onBlur={(e) => { getStartValue(e, type, datestr, wid) }} />
+                                                <input data-shift="endShift" type="time" required onBlur={(e) => { getEndValue(e, type, datestr, wid) }} />
+                                            {/* </div > */}
                                             {/* <div className="">
                                                 <p>OFF</p>
                                             </div> */}
-                                        </td>
+                                        </td> 
                                     </>)
                                 }
                           
