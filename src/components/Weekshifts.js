@@ -1,9 +1,11 @@
 import React, { useState, useContext } from 'react';
 function Weekshifts({worker, week, setShifts, shifts}) {
-
+    if (!worker) {
+        return <p>loading...</p>
+      }
     const shfitType = ["morning", "evening"]; /* necesito cambiarlo por 0 y 1 para el back */
  
-    const updateWorkerInDataResponse = (shifts, newWorker) =>{
+    const updateWorkerInDataResponse = (newWorker) =>{
         return shifts.map( worker=> worker.id==newWorker.id?newWorker:worker)
     }
 const updateShiftInWorker = (existingShift , workerObj) =>{
@@ -48,9 +50,9 @@ const existEndShift = (workerObj,type,datestr) =>{
             let existingShift = existAnyShift(workerObj,type,datestr);
                 
             if (existingShift && existingShift.active == false){
-                //introducir aqui el codigo para grabar los datos que existan en los inputs de haberlos
+              
                 existingShift = {shiftType: type, date : datestr, startShift: (datestr +" "+ e.target.children[0].value), endShift: (datestr +" "+ e.target.children[1].value), active : true };
-                console.log("esta Off",e.target);
+             
                                 
                 workerObj = updateShiftInWorker(existingShift, workerObj);
             }
@@ -67,7 +69,7 @@ const existEndShift = (workerObj,type,datestr) =>{
                     active : false
                 })
             }
-            let newDataResponse = updateWorkerInDataResponse(shifts, workerObj)
+            let newDataResponse = updateWorkerInDataResponse(workerObj)
             
             setShifts(newDataResponse);
          
@@ -98,7 +100,7 @@ const existEndShift = (workerObj,type,datestr) =>{
                 startShift: (datestr+" "+ e.target.value),
             })
         }
-        let newDataResponse = updateWorkerInDataResponse(shifts, workerObj)
+        let newDataResponse = updateWorkerInDataResponse( workerObj)
         
         setShifts(newDataResponse);
      
@@ -123,7 +125,7 @@ const existEndShift = (workerObj,type,datestr) =>{
         }else if (existingEndShift){
             existingEndShift = {...existingEndShift, endShift:  (datestr +" "+ e.target.value) }
             workerObj = updateShiftInWorker(existingEndShift, workerObj);
-           console.log("pasa por aqui?");
+          
             
         }else{
             workerObj.shifts.push({
@@ -131,7 +133,7 @@ const existEndShift = (workerObj,type,datestr) =>{
                 endShift:  (datestr +" "+ e.target.value)
             })
         }
-        let newDataResponse = updateWorkerInDataResponse(shifts, workerObj)
+        let newDataResponse = updateWorkerInDataResponse( workerObj)
         // console.log({workerObj, newDataResponse});
         setShifts(newDataResponse);
      
@@ -141,7 +143,7 @@ const existEndShift = (workerObj,type,datestr) =>{
 
     return (
         <>
-            {shfitType.map((type,index) => {
+            {shfitType.map((type) => {
                 let cabecera = "";
                 let wid = worker.id;
              
@@ -158,16 +160,16 @@ const existEndShift = (workerObj,type,datestr) =>{
                                     /* si tiene shifts en los datos que el back nos devuelve: */
                                 
                                
-                                let conditionShift = worker.shifts.filter(shift => shift.shiftType == type && shift.startShift && new Date(shift.startShift.date).toISOString().slice(0, 10) == datestr);
+                                let conditionShift = worker.shifts.find(shift => shift.shiftType == type  && typeof shift.startShift !== "string" && shift.startShift && new Date(shift.startShift.date).toISOString().slice(0, 10) == datestr);
                                     /* condicion para saber si hay datos de la base de datos para rango de (mañ/tard) que estemos y la fecha en el trabajador en el que estamos */
 
-                                if (conditionShift[0]) {
+                                if (conditionShift) {
                                     
                                     return (<>
                                         <td data-shiftid={conditionShift.id}>
                                               
-                                            {("0" + (new Date(conditionShift[0].startShift.date).getHours())).slice(-2)}:{("0" + (new Date(conditionShift[0].startShift.date).getMinutes())).slice(-2)} /
-                                            {("0" + (new Date(conditionShift[0].endShift.date).getHours())).slice(-2)}:{("0" + (new Date(conditionShift[0].endShift.date).getMinutes())).slice(-2)}
+                                            {("0" + (new Date(conditionShift.startShift.date).getHours())).slice(-2)}:{("0" + (new Date(conditionShift.startShift.date).getMinutes())).slice(-2)} /
+                                            {("0" + (new Date(conditionShift.endShift.date).getHours())).slice(-2)}:{("0" + (new Date(conditionShift.endShift.date).getMinutes())).slice(-2)}
 
                                         </td>
                                     </>)
