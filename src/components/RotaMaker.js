@@ -34,19 +34,25 @@ function RotaMaker() {
   
      
       fetch(URLROTA,reqOpt)
-      .then(response => 
-        response.json())
-      .then(data => {
-      
-         setShifts(data);
-         
-       
-      }
+      .then(response =>{ 
+        if (response.status === 401){
+          alert("epaaa no estas logueado tira patras!")
+        }else{
 
-      ).catch(error => {
-       console.log("ha habido un error:", error)
-      });
-   }
+          response.json()
+          .then(data => {
+          
+             setShifts(data);
+             
+           
+          }
+    
+          ).catch(error => {
+           console.log("ha habido un error:", error)
+          });
+        }
+      })
+    } 
 useEffect(() => {
   getDataWeek();
  
