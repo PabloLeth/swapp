@@ -39,19 +39,20 @@ const existEndShift = (workerObj,type,datestr) =>{
     const existStartShift = (workerObj,type,datestr) =>{
         let existingStartShift = workerObj.shifts?.find(shift => 
             shift.shiftType == type
-             && typeof shift.startShift == "string" 
-             && shift.startShift.substring(0, 10) == datestr); 
+             && typeof shift.date == "string" 
+             && shift.date.substring(0, 10) == datestr); 
         return existingStartShift;
     }
 
     const toggleInput = (e, type, datestr, wid) =>{
-       
+            let inputsTarget = e.currentTarget.firstChild;
+            console.log(inputsTarget);
             let workerObj = shifts.find(w =>{return w.id == wid }); 
             let existingShift = existAnyShift(workerObj,type,datestr);
                 
             if (existingShift && existingShift.active == false){
               
-                existingShift = {shiftType: type, date : datestr, startShift: (datestr +" "+ ""), endShift: (datestr +" "+ ""), active : true };
+                existingShift = {shiftType: type, date : datestr, startShift: (datestr +" "+ inputsTarget.firstChild.value), endShift: (datestr +" "+ inputsTarget.lastChild.value), active : true };
              
                                 
                 workerObj = updateShiftInWorker(existingShift, workerObj);
@@ -180,7 +181,7 @@ const existEndShift = (workerObj,type,datestr) =>{
                                         <td data-shiftType={type} data-date={datestr} data-wid={wid} id={index} onDoubleClick={(e)=>{toggleInput(e, type, datestr, wid)}}>
                                        
                                            
-                                            <div  className={conditionActive ? (conditionActive.active === true ? "":"hide"):""}>
+                                            <div  className={conditionActive ? (conditionActive.active === false ? "hide":""):""}>
                                                 <input data-shift="startShift"type="time"required onBlur={(e) => { getStartValue(e, type, datestr, wid) }} />
                                                 <input data-shift="endShift" type="time" required onBlur={(e) => { getEndValue(e, type, datestr, wid) }} />
                                             </div > 
