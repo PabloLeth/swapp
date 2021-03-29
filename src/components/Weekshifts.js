@@ -3,7 +3,7 @@ function Weekshifts({worker, week, setShifts, shifts}) {
     if (!worker) {
         return <p>loading...</p>
       }
-    const shfitType = ["morning", "evening"]; /* necesito cambiarlo por 0 y 1 para el back */
+    const shfitType = ["1", "2"]; /* necesito cambiarlo por 0 y 1 para el back */
  
     const updateWorkerInDataResponse = (newWorker) =>{
         return shifts.map( worker=> worker.id==newWorker.id?newWorker:worker)
@@ -148,7 +148,7 @@ const existEndShift = (workerObj,type,datestr) =>{
                 let cabecera = "";
                 let wid = worker.id;
              
-                if (type == "morning") { /* para poner cabecera con nombre en mañana y tarde por rowspan */
+                if (type == "1") { /* para poner cabecera con nombre en mañana y tarde por rowspan */
                     cabecera = <th className="table-dark" rowspan="2" id={worker.id} >{worker.id}, {worker.worker}</th>;
                 }
                 return (

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import './pool.css';
 
 function Pool() {
-
+  let token = localStorage.getItem("token");
   const [{ data, error, isLoading }, dispatch] = useState({
     data: null,
     error: null,
@@ -16,7 +16,8 @@ function Pool() {
   const URLPOOL = "http://localhost:8000/shift/pool";
 
   useEffect(() => {
-    fetch(URLPOOL)
+    fetch(URLPOOL, {headers: { Authorization : `Bearer ${token}`}, })
+
       .then(response => response.json())
       .then(data => {dispatch({ data, error: null, isLoading: false })
 
