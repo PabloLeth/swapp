@@ -44,3 +44,6 @@ body{
   color: chartreuse;
   border-bottom: chartreuse;
 }
+.hide{
+  display: none;
+}

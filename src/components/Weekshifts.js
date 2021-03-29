@@ -16,7 +16,7 @@ const updateShiftInWorker = (existingShift , workerObj) =>{
                 && typeof shift.date == "string"
                 && shift.date.substring(0, 10) == existingShift.date.substring(0, 10) 
                 ;
-        console.log(found);
+     
        return found ? existingShift : shift
     })
 
@@ -51,7 +51,7 @@ const existEndShift = (workerObj,type,datestr) =>{
                 
             if (existingShift && existingShift.active == false){
               
-                existingShift = {shiftType: type, date : datestr, startShift: (datestr +" "+ e.target.children[0].value), endShift: (datestr +" "+ e.target.children[1].value), active : true };
+                existingShift = {shiftType: type, date : datestr, startShift: (datestr +" "+ ""), endShift: (datestr +" "+ ""), active : true };
              
                                 
                 workerObj = updateShiftInWorker(existingShift, workerObj);
@@ -159,15 +159,15 @@ const existEndShift = (workerObj,type,datestr) =>{
                          
                                     /* si tiene shifts en los datos que el back nos devuelve: */
                                 
-                               
-                                let conditionShift = worker.shifts.find(shift => shift.shiftType == type  && typeof shift.startShift !== "string" && shift.startShift && new Date(shift.startShift.date).toISOString().slice(0, 10) == datestr);
+                                let conditionShift = worker.shifts.find(shift => shift.shiftType == type && typeof shift.startShift !== "string" && shift.startShift && new Date(shift.startShift.date).toISOString().slice(0, 10) == datestr);
                                     /* condicion para saber si hay datos de la base de datos para rango de (mañ/tard) que estemos y la fecha en el trabajador en el que estamos */
-
+                                let conditionActive  =  worker.shifts.find(shift => shift.shiftType == type && typeof shift.date == "string" && shift.date.substring(0, 10) == datestr);
+                                
                                 if (conditionShift) {
                                     
                                     return (<>
                                         <td data-shiftid={conditionShift.id}>
-                                              
+                                            
                                             {("0" + (new Date(conditionShift.startShift.date).getHours())).slice(-2)}:{("0" + (new Date(conditionShift.startShift.date).getMinutes())).slice(-2)} /
                                             {("0" + (new Date(conditionShift.endShift.date).getHours())).slice(-2)}:{("0" + (new Date(conditionShift.endShift.date).getMinutes())).slice(-2)}
 
@@ -178,13 +178,17 @@ const existEndShift = (workerObj,type,datestr) =>{
                                            
                                     return (<>
                                         <td data-shiftType={type} data-date={datestr} data-wid={wid} id={index} onDoubleClick={(e)=>{toggleInput(e, type, datestr, wid)}}>
-                                            {/* <div className=""> */}
+                                       
+                                           
+                                            <div  className={conditionActive ? (conditionActive.active === true ? "":"hide"):""}>
                                                 <input data-shift="startShift"type="time"required onBlur={(e) => { getStartValue(e, type, datestr, wid) }} />
                                                 <input data-shift="endShift" type="time" required onBlur={(e) => { getEndValue(e, type, datestr, wid) }} />
-                                            {/* </div > */}
-                                            {/* <div className="">
-                                                <p>OFF</p>
-                                            </div> */}
+                                            </div > 
+                                           <div className={conditionActive ? conditionActive.active === false ? "":"hide":"hide"}>
+                                               <p>OFF</p>
+                                           </div>
+                                           
+                                            
                                         </td> 
                                     </>)
                                 }
