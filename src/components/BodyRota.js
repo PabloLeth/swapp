@@ -3,6 +3,9 @@ function BodyRota({ data }) {
     if (!data) {
       return <p>loading...</p>
     }
+    if(data){
+      console.log(data);
+    }
     let token = localStorage.getItem("token");
 
     const URLSHIFT = "http://localhost:8000/shift/swapping";
@@ -19,7 +22,7 @@ function BodyRota({ data }) {
  
     fetch(`${URLSHIFT}/${e.target.id}`,reqOpt)
     .then(response => response.json())
-    .then(data => {console.log(data.answer)}
+    .then(data => {swal(data.answer)}
   
     ).catch(error => {
      
@@ -46,26 +49,20 @@ function BodyRota({ data }) {
               swal("you will work this shift then!");
             }
           });
-       // e.target.id
-        // setShow(!show);
-
-        //  if (confirm(` confirma que desea deshacerse de este turno ${shift.id}, ${shift.date} `)){
-        //       functionfetchingtoswapping();
-        //       alert("perfecto, tu turno ha ido a la piscina de turnos");
-        //   }
-        //aqui ira una funcion con un fetch para cambiar swapping a true
+   
     }
     return(
         <>
         <tr>
             <th className="table-dark">Morning</th>
+            {data== null? "" : <td colspan="7"> <h3>  No Rota Yet</h3></td>}
             {data.map(shift => {
 
                 if (shift.shiftType == "morning") {
                     return (<td
                        
                        
-                         className={shift.swapping ? "table-warning" : "table-success" }
+                         className={shift.swapping ? "td-pool" : "td-morning " }
                         onClick={(e) => shiftToPool(e)}
                         id={shift.id} 
                         key={shift.id} >
@@ -80,11 +77,12 @@ function BodyRota({ data }) {
         </tr>
         <tr>
             <th className="table-dark">Evening</th>
+            {data===null? "" : <td colspan="7"> <h3> No Rota Yet</h3></td>}
             {data.map(shift => {
 
                 if (shift.shiftType == "evening") {
                     return (<td
-                        className={shift.swapping ? "table-warning" : "table-success" }
+                        className={shift.swapping ? "td-pool" : "td-evening " }
                         onClick={(e) => shiftToPool(e)}
                         id={shift.id} >
                         { ("0" + (new Date(shift.startShift.date).getHours())).slice(-2)}:{("0" + (new Date(shift.startShift.date).getMinutes())).slice(-2)} /

@@ -5,7 +5,7 @@ input[type=time]{
     border: none;
     color: #2a2c2d;
     font-size: 12px;
-  
+    background-color: transparent;
   
 }
 

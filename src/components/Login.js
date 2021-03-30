@@ -49,7 +49,7 @@ const {setAuthTokens} = useAuth();
 
     }
     if (isloged){
-         return <Redirect to="/"/>
+         return <Redirect to="/profile"/>
     }
 
     return (

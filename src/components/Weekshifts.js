@@ -167,7 +167,7 @@ const existEndShift = (workerObj,type,datestr) =>{
                                 if (conditionShift) {
                                     
                                     return (<>
-                                        <td data-shiftid={conditionShift.id}>
+                                        <td data-shiftid={conditionShift.id} className={type == "1" ? "td-morning" : type== "2" ? "td-evening" : ""}>
                                             
                                             {("0" + (new Date(conditionShift.startShift.date).getHours())).slice(-2)}:{("0" + (new Date(conditionShift.startShift.date).getMinutes())).slice(-2)} /
                                             {("0" + (new Date(conditionShift.endShift.date).getHours())).slice(-2)}:{("0" + (new Date(conditionShift.endShift.date).getMinutes())).slice(-2)}
@@ -178,7 +178,7 @@ const existEndShift = (workerObj,type,datestr) =>{
                                 } else {
                                            
                                     return (<>
-                                        <td data-shiftType={type} data-date={datestr} data-wid={wid} id={index} onDoubleClick={(e)=>{toggleInput(e, type, datestr, wid)}}>
+                                        <td className={type == "1" ? "td-morning" : type== "2" ? "td-evening" : ""} data-shiftType={type} data-date={datestr} data-wid={wid} id={index} onDoubleClick={(e)=>{toggleInput(e, type, datestr, wid)}}>
                                        
                                            
                                             <div  className={conditionActive ? (conditionActive.active === false ? "hide":""):""}>
@@ -186,7 +186,7 @@ const existEndShift = (workerObj,type,datestr) =>{
                                                 <input data-shift="endShift" type="time" required onBlur={(e) => { getEndValue(e, type, datestr, wid) }} />
                                             </div > 
                                            <div className={conditionActive ? conditionActive.active === false ? "":"hide":"hide"}>
-                                               <p>OFF</p>
+                                               <b>OFF</b>
                                            </div>
                                            
                                             

@@ -67,7 +67,7 @@ function Rota() {
     .then(response => {
         if (response.ok){
             response.json()
-            .then(data => {setData(data);console.log(data)})
+            .then(data => {setData(data);})
         }
         if(response.status==401){
             alert("Wopa! no estas logueado o no tienes permisos para acceder");
@@ -92,7 +92,7 @@ function Rota() {
                 </div>
                 <input type="button" value="semana proxima" onClick={() => { handlenext() }} />
             </div>
-            <table className="table table-hover">
+            <table className="table text-center">
                 <thead className="table-dark">
                     <tr>
                         {dayName.map(value => {return <th scope="col">{value}</th>})}
