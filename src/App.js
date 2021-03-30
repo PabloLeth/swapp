@@ -5,10 +5,18 @@ import {AuthContext} from './context/auth'
 
 import './App.css';
 import Navbar from './components/Navbar';
-import LoginPage from './pages/LoginPage';
+
 import Index from './pages/Index';
 import ChatWindow from './components/ChatWindow';
 import jwt_decode from "jwt-decode";
+
+
+import Profile from './pages/Profile';
+import Rota from "./components/Rota";
+import Manager from './pages/Manager';
+import Pool from './pages/Pool';
+import LoginPage from './pages/LoginPage';
+import PrivateRoute from './PrivateRoute';
 function App() {
 
   const tokenStored = localStorage.getItem("token");
@@ -19,11 +27,45 @@ function App() {
      localStorage.setItem("token", data);
      setAuthTokens(data);
    }
+   const boss = () => {
+    if (localStorage.getItem("token")){
+
+        const userLogged = jwt_decode(localStorage.getItem("token"));
+        const boss = userLogged.roles.find(rol => rol == "ROLE_MANAGER");
+        console.log(userLogged);
+        if (boss) return true;
+}}
+const logged = () => {
+    if (localStorage.getItem("token")){
+
+        const userLogged = jwt_decode(localStorage.getItem("token"));
+        const user = userLogged.roles.find(rol => rol == "ROLE_USER");
+        if (user) return true;
+}}
+
+
+const logout = ()=> {
+    localStorage.removeItem("token");
+    setAuthTokens("");
+}
 
      return (
       <>
     <AuthContext.Provider value={{authTokens, setAuthTokens: setTokens}}>
-      <Navbar />
+    <BrowserRouter>
+    {(logged())? <Navbar boss={boss} logged={logged} logout={logout}/> : ""}
+      
+      <Route exact path="/" component={Index} />
+                <Route  path="/Pool" component={Pool} />
+                <Route  path="/profile" component={Profile} />
+                <Route  path="/profile/rota" component={Rota} />
+                <PrivateRoute  path="/manager" component={Manager} /> 
+                <Route  path="/login" component={LoginPage} />
+                {/* <Route  path="/home" component={Home} /> */}
+                {/* <Route  path="/profile/chat" component={ChatWindow} /> */}
+                {/* <Route  path="/chat" component={Chat} /> */}
+
+            </BrowserRouter>
      </AuthContext.Provider>
       </>
     );
