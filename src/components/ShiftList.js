@@ -56,11 +56,10 @@ const swappingFetch = (id) =>{
             data.map(({ date, worker, branch, shiftType, startShift, endShift, job, id }) => {
 
               return (
-                <div className="">
+                <div className="my-card">
                 <div className="card text-center mx-2 my-3 ">
-                  <div className= {`card-body ${shiftType == "morning" ? " bg-warning": "bg-primary" }`}>
-                    {/* <h3 className="card-title">id: {id}</h3> */}
-                    {/* <h4 className="card-title">turno de: {job}</h4> */}
+                  <div className= {`card-body ${shiftType == "morning" ? " morning": "evening" }`}>
+           
                     <h3 className="card-text"><b>{week[new Date(startShift.date).getDay()]}</b></h3>
                     <p className="card-text"><b>{startShift.date.slice(5, 10)}</b></p>
 
@@ -69,7 +68,7 @@ const swappingFetch = (id) =>{
                     <p className="card-text">from: <b>{startShift.date.slice(11, 16)} - {endShift.date.slice(11, 16)}</b></p>
 
                     <p className="card-text">Change with: {worker}</p>
-                    <a href="#" className="btn btn-primary"id={id} onClick={()=>takeShift(id)}>me lo quedo</a>
+                    <a href="#" className="p-2"id={id} onClick={()=>takeShift(id)}>me lo quedo</a>
                   </div>
                 </div>
                 </div>

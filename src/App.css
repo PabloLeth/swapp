@@ -67,4 +67,10 @@ h1{
   
   text-align: center;
 }
-    
+.th-rad{
+  border-radius: 5px; 
+}
+.min-view{
+  height: 100vh;
+}   
+

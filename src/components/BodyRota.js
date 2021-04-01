@@ -55,7 +55,7 @@ function BodyRota({ data }) {
         <>
         <tr>
             <th className="table-dark">Morning</th>
-            {data== null? "" : <td colspan="7"> <h3>  No Rota Yet</h3></td>}
+            {data.length === 0? <td colspan="7"> <h3>  No Rota Yet</h3></td> :"" }
             {data.map(shift => {
 
                 if (shift.shiftType == "morning") {
@@ -66,8 +66,9 @@ function BodyRota({ data }) {
                         onClick={(e) => shiftToPool(e)}
                         id={shift.id} 
                         key={shift.id} >
-                        { ("0" + (new Date(shift.startShift.date).getHours())).slice(-2)}:{("0" + (new Date(shift.startShift.date).getMinutes())).slice(-2)} /
-                        { ("0" + (new Date(shift.endShift.date).getHours())).slice(-2)}:{("0" + (new Date(shift.endShift.date).getMinutes())).slice(-2)}
+                    {shift.active?  <p>{ ("0" + (new Date(shift.startShift.date).getHours())).slice(-2)}:{("0" + (new Date(shift.startShift.date).getMinutes())).slice(-2)} /
+                                       { ("0" + (new Date(shift.endShift.date).getHours())).slice(-2)}:{("0" + (new Date(shift.endShift.date).getMinutes())).slice(-2)}</p>
+                          :  <b>OFF</b> }
 
                     </td>)
                 }
@@ -77,7 +78,7 @@ function BodyRota({ data }) {
         </tr>
         <tr>
             <th className="table-dark">Evening</th>
-            {data===null? "" : <td colspan="7"> <h3> No Rota Yet</h3></td>}
+            {data.length === 0? <td colspan="7"> <h3>  No Rota Yet</h3></td> : "" }
             {data.map(shift => {
 
                 if (shift.shiftType == "evening") {
@@ -85,9 +86,11 @@ function BodyRota({ data }) {
                         className={shift.swapping ? "td-pool" : "td-evening " }
                         onClick={(e) => shiftToPool(e)}
                         id={shift.id} >
-                        { ("0" + (new Date(shift.startShift.date).getHours())).slice(-2)}:{("0" + (new Date(shift.startShift.date).getMinutes())).slice(-2)} /
-                        { ("0" + (new Date(shift.endShift.date).getHours())).slice(-2)}:{("0" + (new Date(shift.endShift.date).getMinutes())).slice(-2)}
-
+                          { shift.active?  
+                          <p>{ ("0" + (new Date(shift.startShift.date).getHours())).slice(-2)}:{("0" + (new Date(shift.startShift.date).getMinutes())).slice(-2)} /
+                             { ("0" + (new Date(shift.endShift.date).getHours())).slice(-2)}:{("0" + (new Date(shift.endShift.date).getMinutes())).slice(-2)}</p>
+                          : <b>OFF</b> }
+                   
                     </td>)
                 }
             }

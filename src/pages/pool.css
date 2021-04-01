@@ -4,3 +4,23 @@ body{
 .cardsize{
     width: 18rem;
 }
+.my-card a{
+ text-decoration: none;
+
+ color: #333;
+ border-radius: 20px;
+ border: #333 solid 1px;
+ 
+}
+.my-card a:hover{
+    color: black;
+   border: black solid 1px;
+   background-color:rgba(0, 0, 0, 0.1);
+}
+
+.morning{
+    background-color: #7ccde3;
+}
+.evening{
+    background-color:#7bb474;
+}

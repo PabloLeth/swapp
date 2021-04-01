@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import {AuthContext} from './context/auth';
 import './App.css';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import Index from './pages/Index';
 import jwt_decode from "jwt-decode";
 import Profile from './pages/Profile';
@@ -49,7 +50,8 @@ const logout = ()=> {
     <AuthContext.Provider value={{authTokens, setAuthTokens: setTokens}}>
     <BrowserRouter>
         {(logged())? <Navbar boss={boss} logged={logged} logout={logout}/> : ""}
-      
+      <div className = "min-view">
+
         <Route exact path="/" component={Index} />
         <Route  path="/Pool" component={Pool} />
         <Route  path="/profile" component={Profile} />
@@ -57,8 +59,10 @@ const logout = ()=> {
         <PrivateRoute  path="/manager" component={Manager} /> 
         <Route  path="/login" component={LoginPage} />
        
+      </div>
     </BrowserRouter>
      </AuthContext.Provider>
+     {(logged())? <Footer/> : ""}
       </>
     );
   }

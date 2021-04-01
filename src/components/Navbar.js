@@ -7,7 +7,7 @@ function Navbar({boss, logged, logout}) {
     return (
      <>
         <nav className="">
-                <div className="navbar-nav-scroll">
+                <div className="">
                     <ul className="navbar-nav bd-navbar-nav flex-row bg-dark">
                         {/* <li className="nav-item m-2"><NavLink to="/home">Inicio</NavLink></li> */}
                         {/* <li className="nav-item m-2"><NavLink to="/chat">Chat</NavLink></li> */}

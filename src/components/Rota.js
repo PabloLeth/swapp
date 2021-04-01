@@ -2,11 +2,16 @@ import { useState, useEffect } from 'react';
 import ModalShift from './ModalShift';
 import BodyRota from './BodyRota';
 import {Redirect, Route} from 'react-router-dom';
-
+import Footer from '../components/Footer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, faArrowRight  } from '@fortawesome/free-solid-svg-icons';
 
 function Rota() {
+    const arrowL =  <FontAwesomeIcon icon={faArrowLeft} />
+    const arrowR =  <FontAwesomeIcon icon={faArrowRight} />
     const dayName = ["#","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
-    const monthName = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    const mes = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const [data, setData] = useState([]);
     const todayWeek = [];
     const today = new Date;
@@ -84,21 +89,26 @@ function Rota() {
 
     return (
         <>
-            <div className="container row justify-content-around ">
-                <input type="button" value="semana anterior" onClick={() => { handleprev() }} />
-                <div className="text-center" >
-                    <h1>{week[0].getFullYear()}</h1>
-                    <h3>semana del {week[0].getDate()} de {monthName[week[0].getMonth()]} al {week[6].getDate()} de {monthName[week[6].getMonth()]}</h3>
-                </div>
-                <input type="button" value="semana proxima" onClick={() => { handlenext() }} />
+          <div className="row align-items-center">
+            <div  className=" col d-flex justify-content-center">
+               <a href="#" onClick={()=>{handleprev()}}>{arrowL} prev week</a>
             </div>
-            <table className="table text-center">
+            <div className="text-center col-8" >
+                <h1>{week[0].getFullYear()}</h1>
+                <h3>Week from {week[0].getDate()} of {month[week[0].getMonth()]} to {week[6].getDate()} of {month[week[6].getMonth()]}</h3>
+            </div>
+            <div  className="col d-flex justify-content-center">
+           
+            <a href="#" onClick={()=>{handlenext()}}> next week {arrowR}</a>
+            </div>
+        </div>
+            <table className="table text-center my-4">
                 <thead className="table-dark">
                     <tr>
                         {dayName.map(value => {return <th scope="col">{value}</th>})}
                     </tr>
                     <tr>
-                        <th scope="col"></th>
+                        <th className="th-rad" scope="col"></th>
                         {week.map(day => { return <th colspan="1" scope="col">{("0" + day.getDate()).slice(-2)} - {("0" + (day.getMonth() + 1)).slice(-2)}</th> })}
 
                     </tr>
@@ -108,6 +118,8 @@ function Rota() {
 
                 </tbody>
             </table>
+        
+
         </>
     )
 }

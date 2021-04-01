@@ -22,10 +22,10 @@ function SearchShifts({ setFilteredData , data }) {
       <form onSubmit={handleSubmit}>
       
      <input type="text"
-     className="form-control col-4" 
+     className="form-control col-4 my-2" 
      placeholder="introduce el restaurante donde buscar turnos" 
      value={search} onChange ={ (e) => {setSearch(e.target.value)}} />
-     <input type="submit" value="busca"/>
+     <input className ="my-2" type="submit" value="busca"/>
     </form>
       </div>
      
