@@ -185,7 +185,7 @@ useEffect(() => {
             <button onClick={()=>{muestrashifts()}}>MUESTRA LOS SHIFTS A</button>
             
             <button onClick={()=>{sendToDb()}}>Enviar a DB</button>
-          <Footer/>
+    
         </>
     )
 }

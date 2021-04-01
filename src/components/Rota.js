@@ -24,7 +24,6 @@ function Rota() {
 
     
     let token = localStorage.getItem("token");
-    // let token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MTY0MjgzMDcsImV4cCI6MTYxNjQzMTkwNywicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiYW5pdGFkaW5hbWl0YUBob3RtYWlsLmNvbSJ9.NcUUgJm130Yiknf0StRLj0CIHTAQp1CDFWHFSWzB_lUi3NGlZHUB01r9er5p1i_Ec1p0LwgvUh1im4FsXo85-GJKrW987smTElBkSt0nuAAj2gr_2fEcmwrZC3m_SHWwfypYppBmhfQQvJHHAk9N37jMtxTprKZ1DNN0dou975URJWndnxzhrjCg-eRMtrDMsciIgDp1P05dVi12rKdojdyizI2t2vPOy5FxFo8TgWN0i_N9uNVc9xhC01ySIfF6uHRmF1M1ILUuQ63-0mrDljQIqCbhFMVwhrdQIEXvap2sbgpMnxQ0lUxnulJIYyB_ivv5UPkPximwzlZ5tGxVuQ";
     const URLSHIFT = "http://localhost:8000/shift/rotauser";
     
     const reqOpt = {
