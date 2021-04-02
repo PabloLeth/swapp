@@ -164,24 +164,24 @@ function Weekshifts({ worker, week, setShifts, shifts }) {
 
                             
                             if (conditionShift) {
-                                console.log(conditionShift.date.date," form:" , new Date ((new Date(conditionShift.date.date).getTime()) + 120*60*1000+1).toISOString() );
+                                
                                 if (conditionShift.active === true) {
                                     return (<>
 
                                         <td data-shiftid={conditionShift.id} className={type == "1" ? "td-morning" : type == "2" ? "td-evening" : ""}>
-                                            {conditionShift.id} . .
+                                          
                                             {("0" + (new Date(conditionShift.startShift.date).getHours())).slice(-2)}:{("0" + (new Date(conditionShift.startShift.date).getMinutes())).slice(-2)} /
                                             {("0" + (new Date(conditionShift.endShift.date).getHours())).slice(-2)}:{("0" + (new Date(conditionShift.endShift.date).getMinutes())).slice(-2)}
 
                                         </td>
-                                    </>)
+                                    </>) 
                                 }
                                 if (conditionShift.active === false) {
                                     return (
 
-                                        <td data-shiftid={conditionShift.id} className={type == "1" ? "td-morning" : type == "2" ? "td-evening" : ""} >
+                                        <td data-shiftid={conditionShift.id} className="td-off">
                                             <div className="">
-                                                <b>{conditionShift.id}OFF </b>
+                                                <b>OFF </b>
                                             </div>
                                         </td>
                                     )
@@ -191,6 +191,7 @@ function Weekshifts({ worker, week, setShifts, shifts }) {
                                     return (<>
                                         <td className={type == "1" ? "td-morning" : type == "2" ? "td-evening" : ""} data-shiftType={type} data-date={datestr} data-wid={wid} id={index} onDoubleClick={(e) => { toggleInput(e, type, datestr, wid) }}>
 
+                                       
 
                                             <div className={conditionActive ? (conditionActive.active === false ? "hide" : "") : ""}>
                                                 <input data-shift="startShift" type="time" required onBlur={(e) => { getStartValue(e, type, datestr, wid) }} />
