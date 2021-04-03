@@ -2,8 +2,11 @@ import ShiftList from '../components/ShiftList';
 import SearchShifts from '../components/SearchShifts';
 import { useEffect, useState } from 'react';
 import './pool.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFrownOpen } from '@fortawesome/free-solid-svg-icons';
 
 function Pool() {
+  const sad =  <FontAwesomeIcon icon={faFrownOpen} />
   let token = localStorage.getItem("token");
   const [{ data, error, isLoading }, dispatch] = useState({
     data: null,
@@ -37,12 +40,13 @@ function Pool() {
     <>
 
       <div className="container">
-        <p>este es el Pool donde aparecen los turnos que se van a cambiar con otros usuarios</p>
+        {/* <p>este es el Pool donde aparecen los turnos que se van a cambiar con otros usuarios</p> */}
         {isLoading ? <ShiftList data={filteredData}/> :  <SearchShifts setFilteredData = {setFilteredData} data = {data}/> }
        
-        <div className="container">
+        {/* <div className="container pool-back"> */}
+        <div className={`container ${ filteredData ? filteredData.length==0?  "":"pool-back":""}`}>
           <div className="row d-flex justify-content-around">
-            <ShiftList data={filteredData}/>
+           { filteredData ? filteredData.length==0?  <h3>No results to show {sad} </h3>:<ShiftList data={filteredData}/>:""}
           </div>
         </div>
          

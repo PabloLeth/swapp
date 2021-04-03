@@ -24,3 +24,10 @@ body{
 .evening{
     background-color:#7bb474;
 }
+.pool-back{
+
+    background: linear-gradient(rgba(162, 160, 160, 0.6),rgba(255, 255, 255, 0.6)), url(../images/pool-1.jpg);
+    background-position:center;
+    background-size: cover;
+    border-radius: 15px;
+  }
