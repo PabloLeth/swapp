@@ -4,6 +4,7 @@ import Weekshifts from './Weekshifts';
 import Footer from '../components/Footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight  } from '@fortawesome/free-solid-svg-icons';
+import swal from 'sweetalert';
 function RotaMaker() {
   const arrowL =  <FontAwesomeIcon icon={faArrowLeft} />
   const arrowR =  <FontAwesomeIcon icon={faArrowRight} />
@@ -101,7 +102,7 @@ useEffect(() => {
       console.log("turnos",shifts);
   }
  
-  const sendToDb = () =>{
+  const sendFetch = () => {
     const URLADD = "http://localhost:8000/shift/manager/new";
   
     const reqOpt = {
@@ -117,14 +118,14 @@ useEffect(() => {
       fetch(URLADD,reqOpt)
       .then(response =>{ 
         if (response.status === 401){
-          alert("epaaa no estas logueado tira patras!")
+          alert("Ups! It seems you are not logged in")
         }else{
 
           response.json()
           .then(data => {
-          
+          swal(data.message, {icon: "success",})
            console.log(data);
-             
+           getDataWeek() ;
            
           }
     
@@ -134,12 +135,32 @@ useEffect(() => {
         }
       })
   }
+
+  const sendToDb = () =>{
+    swal({
+      title: "Are you sure you want to commit?",
+      text: "Just making sure this is the right rota",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willSend) => {
+      if (willSend) {
+          
+          sendFetch();
+        
+      } else {
+        swal(" No worries, keep working this hard and commit it when ready");
+      }
+    });
+  
+  }
   
   
 
     return (
         <>
-     <div className="row align-items-center">
+     <div className="row align-items-center bg-dates py-4">
             <div  className=" col d-flex justify-content-center">
                <a href="#" onClick={()=>{handleprev()}}>{arrowL} prev week</a>
             </div>
@@ -153,8 +174,8 @@ useEffect(() => {
             </div>
         </div>
        
-            <form action=" ">
-                <table id="table-rota" className="table table-sm text-center my-2">
+            <form action=" " id="content-wrap">
+                <table id="table-rota" className="table table-sm text-center mb-2">
             
                     <thead className="table-dark ">
                     <tr>
@@ -183,7 +204,7 @@ useEffect(() => {
                     </tfoot>
                 </table>
             </form>
-            <button onClick={()=>{muestrashifts()}}>MUESTRA LOS SHIFTS A</button>
+           
             
   
     

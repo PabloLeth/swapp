@@ -5,8 +5,9 @@ body{
   
   /* font-family:futura-lt-w01-light,sans-serif; */
   /* font:normal normal normal 18px/22px raleway,sans-serif;  */
-
+overflow-x: hidden;
 }
+
 .App {
   text-align: center;
 }
@@ -65,8 +66,11 @@ body{
   background-color:#df9e59;
 }
 .td-off{
-  background-color:#ffd985;
+  background-color:#9999cc;
   border-radius: 20px;
+}
+.td-off:hover{
+  background-color:#9788bf;
 }
 h1{
   
@@ -79,3 +83,15 @@ h1{
   height: 100vh;
 }   
 
+.bg-dates{
+background-color: #ddd;
+
+}
+.bg-dates a{
+  text-decoration: none;
+  color: #333;
+}
+
+#content-wrap {
+  padding-bottom: 3.5rem;    
+}

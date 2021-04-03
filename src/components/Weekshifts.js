@@ -3,7 +3,7 @@ function Weekshifts({ worker, week, setShifts, shifts }) {
     if (!worker) {
         return <p>loading...</p>
     }
-    const shfitType = ["1", "2"]; /* necesito cambiarlo por 0 y 1 para el back */
+    const shfitType = ["1", "2"]; 
 
     const updateWorkerInDataResponse = (newWorker) => {
         return shifts.map(worker => worker.id == newWorker.id ? newWorker : worker)
@@ -135,7 +135,7 @@ function Weekshifts({ worker, week, setShifts, shifts }) {
             })
         }
         let newDataResponse = updateWorkerInDataResponse(workerObj)
-        // console.log({workerObj, newDataResponse});
+     
         setShifts(newDataResponse);
 
 

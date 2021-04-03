@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight  } from '@fortawesome/free-solid-svg-icons';
 
-function Rota() {
+function RotaHeader() {
     const arrowL =  <FontAwesomeIcon icon={faArrowLeft} />
     const arrowR =  <FontAwesomeIcon icon={faArrowRight} />
     const dayName = ["#","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
@@ -88,7 +88,7 @@ function Rota() {
         <>
           <div className="row align-items-center bg-dates py-4">
             <div  className=" col d-flex justify-content-center">
-               <a href="#" onClick={()=>{handleprev()}}>{arrowL} Prev. week</a>
+               <a href="#" onClick={()=>{handleprev()}}>{arrowL} prev week</a>
             </div>
             <div className="text-center col-8" >
                 <h1>{week[0].getFullYear()}</h1>
@@ -96,29 +96,11 @@ function Rota() {
             </div>
             <div  className="col d-flex justify-content-center">
            
-            <a href="#" onClick={()=>{handlenext()}}> Next week {arrowR}</a>
+            <a href="#" onClick={()=>{handlenext()}}> next week {arrowR}</a>
             </div>
-        </div>
-            <table className="table text-center mb-4">
-                <thead className="table-dark">
-                    <tr>
-                        {dayName.map(value => {return <th scope="col">{value}</th>})}
-                    </tr>
-                    <tr>
-                        <th className="th-rad" scope="col"></th>
-                        {week.map(day => { return <th colspan="1" scope="col">{("0" + day.getDate()).slice(-2)} - {("0" + (day.getMonth() + 1)).slice(-2)}</th> })}
-
-                    </tr>
-                </thead>
-                <tbody>
-                    <BodyRota  data={data} />
-
-                </tbody>
-            </table>
-        
-
+        </div> 
         </>
     )
 }
 
-export default Rota;
+export default RotaHeader;

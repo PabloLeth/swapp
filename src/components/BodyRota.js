@@ -18,19 +18,30 @@ function BodyRota({ data }) {
       body: JSON.stringify({swapping : 1 })
      
   };
-  const swappingFetch= (e) => {
- 
-    fetch(`${URLSHIFT}/${e.target.id}`,reqOpt)
+  const swappingFetch= (id) => {
+
+    fetch(`${URLSHIFT}/${id}`,reqOpt)
     .then(response => response.json())
-    .then(data => {swal(data.answer)}
+    .then(data => {swal(data.answer,{icon: "success",} )}
   
     ).catch(error => {
      
       console.log("ha habido un error:", error)
     });
   }
+    const tdcolor = (swapping, shiftType, active)=>{
+     
+     if( active) {
+      return swapping ? "td-pool" :` td-${shiftType}`;
+     }
+     if (!active){
+       return swapping ? "td-pool":"td-off";
+     }
+     
+    }
     const shiftToPool = (e) => {
-       
+  
+      
         swal({
             title: "Are you sure?",
             text: "Once you send it to the pool, you will have to call your boss and explain it to him to recover it!",
@@ -40,15 +51,13 @@ function BodyRota({ data }) {
           })
           .then((willSend) => {
             if (willSend) {
-                /* meter un fetch a http://localhost:8000/shift/swapping/${e.target.id} */
-                swappingFetch(e);
-              swal("Boom! way to the pool it goes!", {
-                icon: "success",
-              });
+                swappingFetch(e.id);
+              
             } else {
               swal("you will work this shift then!");
             }
           });
+         
    
     }
     return(
@@ -62,12 +71,15 @@ function BodyRota({ data }) {
                     return (<td
                        
                        
-                         className={shift.swapping ? "td-pool" : "td-morning " }
-                        onClick={(e) => shiftToPool(e)}
+                         className={tdcolor(shift.swapping, shift.shiftType, shift.active) }
+                        onClick={(e) => shiftToPool(e.currentTarget)}
+                        
                         id={shift.id} 
                         key={shift.id} >
-                    {shift.active?  <p>{ ("0" + (new Date(shift.startShift.date).getHours())).slice(-2)}:{("0" + (new Date(shift.startShift.date).getMinutes())).slice(-2)} /
+                    {shift.active? <> <p>{ ("0" + (new Date(shift.startShift.date).getHours())).slice(-2)}:{("0" + (new Date(shift.startShift.date).getMinutes())).slice(-2)} /
                                        { ("0" + (new Date(shift.endShift.date).getHours())).slice(-2)}:{("0" + (new Date(shift.endShift.date).getMinutes())).slice(-2)}</p>
+                                       <b>{shift.branch}</b>
+                                  </>
                           :  <b>OFF</b> }
 
                     </td>)
@@ -83,12 +95,14 @@ function BodyRota({ data }) {
 
                 if (shift.shiftType == "evening") {
                     return (<td
-                        className={shift.swapping ? "td-pool" : "td-evening " }
+                        className={tdcolor(shift.swapping, shift.shiftType, shift.active) }
                         onClick={(e) => shiftToPool(e)}
                         id={shift.id} >
                           { shift.active?  
-                          <p>{ ("0" + (new Date(shift.startShift.date).getHours())).slice(-2)}:{("0" + (new Date(shift.startShift.date).getMinutes())).slice(-2)} /
+                          <> <p>{ ("0" + (new Date(shift.startShift.date).getHours())).slice(-2)}:{("0" + (new Date(shift.startShift.date).getMinutes())).slice(-2)} /
                              { ("0" + (new Date(shift.endShift.date).getHours())).slice(-2)}:{("0" + (new Date(shift.endShift.date).getMinutes())).slice(-2)}</p>
+                             <b>{shift.branch}</b> 
+                          </>
                           : <b>OFF</b> }
                    
                     </td>)

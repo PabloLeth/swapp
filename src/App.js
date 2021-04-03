@@ -62,7 +62,7 @@ const logout = ()=> {
       </div>
     </BrowserRouter>
      </AuthContext.Provider>
-     {/* {(logged())? <Footer/> : ""} */}
+     {(logged())? <Footer/> : ""}
       </>
     );
   }
