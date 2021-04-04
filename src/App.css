@@ -91,6 +91,9 @@ background-color: #ddd;
   text-decoration: none;
   color: #333;
 }
+.bg-dates a:hover{
+ color: #555;
+}
 
 #content-wrap {
   padding-bottom: 3.5rem;    
@@ -99,4 +102,7 @@ background-color: #ddd;
 
 .aire{
  min-height: 3.5rem;
+}
+.patata{
+  background-color: seagreen;
 }

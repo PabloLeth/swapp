@@ -8,7 +8,6 @@ import swal from 'sweetalert';
 function RotaMaker() {
   const arrowL =  <FontAwesomeIcon icon={faArrowLeft} />
   const arrowR =  <FontAwesomeIcon icon={faArrowRight} />
-  //const dataResponse = [{"worker":"antonio ","id":2,"shifts":[]},{"worker":"DA BOSS","id":3,"shifts":[]},{"worker":"antonio","id":4,"shifts":[]},{"worker":"ana","id":5,"shifts":[{"id":12,"date":{"date":"2021-03-29 00:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"startShift":{"date":"2021-03-29 10:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"endShift":{"date":"2021-03-29 16:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"shiftType":"morning","active":true},{"id":13,"date":{"date":"2021-03-29 00:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"startShift":{"date":"2021-03-29 18:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"endShift":{"date":"2021-03-29 20:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"shiftType":"evening","active":true},{"id":14,"date":{"date":"2021-03-30 00:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"startShift":{"date":"2021-03-30 10:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"endShift":{"date":"2021-03-30 16:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"shiftType":"morning","active":true},{"id":15,"date":{"date":"2021-03-30 00:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"startShift":{"date":"2021-03-30 18:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"endShift":{"date":"2021-03-30 20:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"shiftType":"evening","active":true},{"id":16,"date":{"date":"2021-03-31 00:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"startShift":{"date":"2021-03-31 10:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"endShift":{"date":"2021-03-31 16:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"shiftType":"morning","active":true},{"id":17,"date":{"date":"2021-03-31 00:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"startShift":{"date":"2021-03-31 18:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"endShift":{"date":"2021-03-31 20:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"shiftType":"evening","active":true},{"id":18,"date":{"date":"2021-04-01 00:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"startShift":{"date":"2021-04-01 10:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"endShift":{"date":"2021-04-01 16:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"shiftType":"morning","active":true},{"id":19,"date":{"date":"2021-04-01 00:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"startShift":{"date":"2021-04-01 18:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"endShift":{"date":"2021-04-01 20:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"shiftType":"evening","active":true},{"id":20,"date":{"date":"2021-04-02 00:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"startShift":{"date":"2021-04-02 10:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"endShift":{"date":"2021-04-02 16:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"shiftType":"morning","active":true},{"id":21,"date":{"date":"2021-04-02 00:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"startShift":{"date":"2021-04-02 18:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"endShift":{"date":"2021-04-02 20:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"shiftType":"evening","active":true},{"id":22,"date":{"date":"2021-04-03 00:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"startShift":{"date":"2021-04-03 10:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"endShift":{"date":"2021-04-03 16:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"shiftType":"morning","active":true},{"id":23,"date":{"date":"2021-04-03 00:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"startShift":{"date":"2021-04-03 18:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"endShift":{"date":"2021-04-03 20:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"shiftType":"evening","active":true},{"id":24,"date":{"date":"2021-04-04 00:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"startShift":{"date":"2021-04-04 10:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"endShift":{"date":"2021-04-04 16:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"shiftType":"morning","active":true},{"id":25,"date":{"date":"2021-04-04 00:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"startShift":{"date":"2021-04-04 18:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"endShift":{"date":"2021-04-04 20:00:00.000000","timezone_type":3,"timezone":"Europe\/Berlin"},"shiftType":"evening","active":true}]},{"worker":"Raquel","id":6,"shifts":[]},{"worker":"Belen","id":7,"shifts":[]},{"worker":"juan","id":8,"shifts":[]},{"worker":"rocio","id":9,"shifts":[]},{"worker":"Pedro","id":10,"shifts":[]},{"worker":"laura","id":11,"shifts":[]},{"worker":"andrea","id":12,"shifts":[]},{"worker":"alejandro","id":13,"shifts":[]},{"worker":"eladio","id":14,"shifts":[]}]
     const dayName = ["#","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
     const shfitType = ["1", "2"]; /* necesito cambiarlo por 2 y 1 para el back? */
     // const month = ["Enero", "Febrero", "Marzo", "Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
@@ -98,7 +97,7 @@ useEffect(() => {
     return setWeek(weekResult);
   }
 
-  const muestrashifts = () =>{
+  const muestrashifts = () =>{  
       console.log("turnos",shifts);
   }
  
@@ -162,7 +161,7 @@ useEffect(() => {
         <>
      <div className="row align-items-center bg-dates py-4">
             <div  className=" col d-flex justify-content-center">
-               <a href="#" onClick={()=>{handleprev()}}>{arrowL} prev week</a>
+               <a href="#" onClick={()=>{handleprev()}}>{arrowL} Prev. week</a>
             </div>
             <div className="text-center col-8" >
                 <h1>{week[0].getFullYear()}</h1>
@@ -170,7 +169,7 @@ useEffect(() => {
             </div>
             <div  className="col d-flex justify-content-center">
            
-            <a href="#" onClick={()=>{handlenext()}}> next week {arrowR}</a>
+            <a href="#" onClick={()=>{handlenext()}}> Next week {arrowR}</a>
             </div>
         </div>
        
@@ -205,7 +204,7 @@ useEffect(() => {
                 </table>
             </form>
            
-            
+            <Footer />
   
     
         </>

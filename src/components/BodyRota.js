@@ -1,5 +1,5 @@
 import swal from 'sweetalert';
-function BodyRota({ data, week }) {
+function BodyRota({ data, week, check, setCheck }) {
   const capitalize = (s) => {
     if (typeof s !== 'string') return '';
     return s.charAt(0).toUpperCase() + s.slice(1);
@@ -26,21 +26,36 @@ function BodyRota({ data, week }) {
   const swappingFetch= (id) => {
 
     fetch(`${URLSHIFT}/${id}`,reqOpt)
-    .then(response => response.json())
-    .then(data => {swal(data.answer,{icon: "success",} )}
-  
-    ).catch(error => {
-     
-      console.log("ha habido un error:", error)
-    });
+    .then(response => {
+
+      if (response.status==403){
+        
+        response.json()
+      .then(data => {swal(data.answer,{icon: "error",} )})
+      }
+      if (response.ok){
+
+        response.json()
+      .then(data => {
+        swal(data.answer,{icon: "success",} );
+        setCheck(!check);
+    } )
+
+      .catch(error => {
+       
+        console.log("ha habido un error:", error)
+      });
+      }
+    })
   }
+
     const tdcolor = (swapping, shiftType, active)=>{
      
      if( active) {
       return swapping ? "td-pool" :` td-${shiftType}`;
      }
      if (!active){
-       return "td-off";
+       return "td-off align-middle";
      }
      
     }
@@ -68,9 +83,10 @@ function BodyRota({ data, week }) {
     }
     return(
         <>
+        {console.log("infinito?")}
           {shiftType.map(type =>{
-          return  <tr>
-              <th className="table-dark">{capitalize(type)}</th>
+          return  <tr className="">
+              <th className="table-dark align-middle">{capitalize(type)}</th>
               {data.length === 0? <td colspan="7"> <h3>  No Rota Yet</h3></td> : "" }
             {week.map(day =>{
               let datestr = day.toISOString().slice(0, 10);

@@ -13,6 +13,7 @@ function Rota() {
     const mes = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
     const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const [data, setData] = useState([]);
+    const [check, setCheck] = useState([false]);
     const todayWeek = [];
     const today = new Date;
     for (let i = 1; i <= 7; i++) {
@@ -62,26 +63,28 @@ function Rota() {
         })
         return setWeek(weekResult);
     }
-    
-    useEffect(() => {
-
-    fetch(URLSHIFT,reqOpt)
-    .then(response => {
-        if (response.ok){
-            response.json()
-            .then(data => {setData(data);})
-        }
-        if(response.status==401){
-            alert("Wopa! no estas logueado o no tienes permisos para acceder");
+    const rotaFetch = () =>{
+        fetch(URLSHIFT,reqOpt)
+        .then(response => {
+            if (response.ok){
+                response.json()
+                .then(data => {setData(data);})
+            }
+            if(response.status==401){
+                alert("Wopa! no estas logueado o no tienes permisos para acceder");
+               
+            }
+        })
            
-        }
-    })
-       
-    .catch(error => {
-     console.log("ha habido un error:", error)
-    }); 
+        .catch(error => {
+         console.log("ha habido un error:", error)
+        }); 
+    }
+    useEffect(() => {
+        rotaFetch();
+    
 
-    }, [week]);
+    }, [week, check ]);
   
 
     return (
@@ -99,7 +102,7 @@ function Rota() {
             <a href="#" onClick={()=>{handlenext()}}> Next week {arrowR}</a>
             </div>
         </div>
-            <table className="table text-center mb-4">
+            <table className="table table-responsive-sm table-responsive-md text-center mb-4">
                 <thead className="table-dark">
                     <tr>
                         {dayName.map(value => {return <th scope="col">{value}</th>})}
@@ -111,12 +114,12 @@ function Rota() {
                     </tr>
                 </thead>
                 <tbody>
-                    <BodyRota  data={data} week={week}/>
+                    <BodyRota  data={data} week={week} setCheck ={setCheck} check={check} />
 
                 </tbody>
             </table>
         
-
+            <Footer />
         </>
     )
 }

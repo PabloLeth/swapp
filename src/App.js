@@ -28,7 +28,7 @@ function App() {
 
         const userLogged = jwt_decode(tokenStored);
         const boss = userLogged.roles.find(rol => rol == "ROLE_MANAGER");
-        console.log(userLogged);
+      
         if (boss) return true;
 }}
 const logged = () => {

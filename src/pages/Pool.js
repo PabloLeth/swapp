@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import './pool.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFrownOpen } from '@fortawesome/free-solid-svg-icons';
+import Footer from '../components/Footer';
 
 function Pool() {
   const sad =  <FontAwesomeIcon icon={faFrownOpen} />
@@ -51,6 +52,7 @@ function Pool() {
         </div>
          
       </div>
+      <Footer />
     </>
   );
 }

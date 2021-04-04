@@ -3,6 +3,10 @@ function Weekshifts({ worker, week, setShifts, shifts }) {
     if (!worker) {
         return <p>loading...</p>
     }
+    const capitalize = (s) => {
+        if (typeof s !== 'string') return '';
+        return s.charAt(0).toUpperCase() + s.slice(1);
+      }
     const shiftType = ["1", "2"]; 
 
     const updateWorkerInDataResponse = (newWorker) => {
@@ -149,7 +153,7 @@ function Weekshifts({ worker, week, setShifts, shifts }) {
                 let wid = worker.id;
 
                 if (type == "1") { /* para poner cabecera con nombre en mañana y tarde por rowspan */
-                    cabecera = <th className="table-dark" rowspan="2" id={worker.id} >{worker.id}, {worker.worker}</th>;
+                    cabecera = <th className="table-dark align-middle" rowspan="2" id={worker.id} >{capitalize(worker.worker)}</th>;
                 }
                 return (
                     <tr>
