@@ -9,7 +9,7 @@ function BodyRota({ data, week }) {
       return <p>loading...</p>
     }
     if(data){
-      console.log(data);
+     
     }
     let token = localStorage.getItem("token");
 
@@ -45,7 +45,7 @@ function BodyRota({ data, week }) {
      
     }
     const shiftToPool = (e) => {
-  
+  console.log(e.id);
       
         swal({
             title: "Are you sure?",
@@ -71,13 +71,14 @@ function BodyRota({ data, week }) {
           {shiftType.map(type =>{
           return  <tr>
               <th className="table-dark">{capitalize(type)}</th>
+              {data.length === 0? <td colspan="7"> <h3>  No Rota Yet</h3></td> : "" }
             {week.map(day =>{
               let datestr = day.toISOString().slice(0, 10);
-           console.log("datestr",datestr);
+          
               let theShift =  data.find(shift => shift.shiftType == type && new Date ((new Date(shift.date.date).getTime()) + 120*60*1000+1).toISOString().slice(0, 10) == datestr);
-              console.log(theShift);
+           
            if (theShift) {  
-             console.log(theShift);
+           
              return (<td
            
                 className={tdcolor(theShift.swapping, theShift.shiftType, theShift.active) }
