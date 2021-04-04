@@ -3,7 +3,7 @@ function Weekshifts({ worker, week, setShifts, shifts }) {
     if (!worker) {
         return <p>loading...</p>
     }
-    const shfitType = ["1", "2"]; 
+    const shiftType = ["1", "2"]; 
 
     const updateWorkerInDataResponse = (newWorker) => {
         return shifts.map(worker => worker.id == newWorker.id ? newWorker : worker)
@@ -144,7 +144,7 @@ function Weekshifts({ worker, week, setShifts, shifts }) {
 
     return (
         <>
-            {shfitType.map((type) => {
+            {shiftType.map((type) => {
                 let cabecera = "";
                 let wid = worker.id;
 
@@ -172,7 +172,7 @@ function Weekshifts({ worker, week, setShifts, shifts }) {
                                           
                                             {("0" + (new Date(conditionShift.startShift.date).getHours())).slice(-2)}:{("0" + (new Date(conditionShift.startShift.date).getMinutes())).slice(-2)} /
                                             {("0" + (new Date(conditionShift.endShift.date).getHours())).slice(-2)}:{("0" + (new Date(conditionShift.endShift.date).getMinutes())).slice(-2)}
-
+                                          
                                         </td>
                                     </>) 
                                 }

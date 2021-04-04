@@ -111,7 +111,7 @@ function Rota() {
                     </tr>
                 </thead>
                 <tbody>
-                    <BodyRota  data={data} />
+                    <BodyRota  data={data} week={week}/>
 
                 </tbody>
             </table>

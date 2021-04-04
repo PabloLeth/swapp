@@ -4,7 +4,7 @@ function Footer() {
 
      return (
       <>
-      <div className="my-4"></div>
+      <div className="">
       <footer className=" footer bg-dark text-center text-lg-start">
 
       <div className="text-center p-3">
@@ -12,7 +12,7 @@ function Footer() {
    
      </div>
       </footer>
-  
+      </div>
       </>
     );
   }

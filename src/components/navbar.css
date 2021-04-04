@@ -156,4 +156,6 @@
       transition: 250ms;
     }
   }
-  
+  .logo{
+    background-image: url(../images/logo.png);
+  }

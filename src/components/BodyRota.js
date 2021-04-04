@@ -1,5 +1,10 @@
 import swal from 'sweetalert';
-function BodyRota({ data }) {
+function BodyRota({ data, week }) {
+  const capitalize = (s) => {
+    if (typeof s !== 'string') return '';
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  }
+  const shiftType = ["morning", "evening"];
     if (!data) {
       return <p>loading...</p>
     }
@@ -35,7 +40,7 @@ function BodyRota({ data }) {
       return swapping ? "td-pool" :` td-${shiftType}`;
      }
      if (!active){
-       return swapping ? "td-pool":"td-off";
+       return "td-off";
      }
      
     }
@@ -51,6 +56,7 @@ function BodyRota({ data }) {
           })
           .then((willSend) => {
             if (willSend) {
+                /* meter un fetch a http://localhost:8000/shift/swapping/${e.target.id} */
                 swappingFetch(e.id);
               
             } else {
@@ -62,55 +68,35 @@ function BodyRota({ data }) {
     }
     return(
         <>
-        <tr>
-            <th className="table-dark">Morning</th>
-            {data.length === 0? <td colspan="7"> <h3>  No Rota Yet</h3></td> :"" }
-            {data.map(shift => {
+          {shiftType.map(type =>{
+          return  <tr>
+              <th className="table-dark">{capitalize(type)}</th>
+            {week.map(day =>{
+              let datestr = day.toISOString().slice(0, 10);
+           console.log("datestr",datestr);
+              let theShift =  data.find(shift => shift.shiftType == type && new Date ((new Date(shift.date.date).getTime()) + 120*60*1000+1).toISOString().slice(0, 10) == datestr);
+              console.log(theShift);
+           if (theShift) {  
+             console.log(theShift);
+             return (<td
+           
+                className={tdcolor(theShift.swapping, theShift.shiftType, theShift.active) }
+               onClick={(e) => shiftToPool(e.currentTarget)}
+               id={theShift.id} 
+               key={theShift.id} >
+           {theShift.active? <> <p>{ ("0" + (new Date(theShift.startShift.date).getHours())).slice(-2)}:{("0" + (new Date(theShift.startShift.date).getMinutes())).slice(-2)} /
+                              { ("0" + (new Date(theShift.endShift.date).getHours())).slice(-2)}:{("0" + (new Date(theShift.endShift.date).getMinutes())).slice(-2)}</p>
+                              <b>{theShift.branch}</b>
+                              </>
+                 :  <b>OFF</b> }
+   
+           </td>)
+}
 
-                if (shift.shiftType == "morning") {
-                    return (<td
-                       
-                       
-                         className={tdcolor(shift.swapping, shift.shiftType, shift.active) }
-                        onClick={(e) => shiftToPool(e.currentTarget)}
-                        
-                        id={shift.id} 
-                        key={shift.id} >
-                    {shift.active? <> <p>{ ("0" + (new Date(shift.startShift.date).getHours())).slice(-2)}:{("0" + (new Date(shift.startShift.date).getMinutes())).slice(-2)} /
-                                       { ("0" + (new Date(shift.endShift.date).getHours())).slice(-2)}:{("0" + (new Date(shift.endShift.date).getMinutes())).slice(-2)}</p>
-                                       <b>{shift.branch}</b>
-                                  </>
-                          :  <b>OFF</b> }
+            })}
+            </tr>
 
-                    </td>)
-                }
-            }
-
-            )}
-        </tr>
-        <tr>
-            <th className="table-dark">Evening</th>
-            {data.length === 0? <td colspan="7"> <h3>  No Rota Yet</h3></td> : "" }
-            {data.map(shift => {
-
-                if (shift.shiftType == "evening") {
-                    return (<td
-                        className={tdcolor(shift.swapping, shift.shiftType, shift.active) }
-                        onClick={(e) => shiftToPool(e)}
-                        id={shift.id} >
-                          { shift.active?  
-                          <> <p>{ ("0" + (new Date(shift.startShift.date).getHours())).slice(-2)}:{("0" + (new Date(shift.startShift.date).getMinutes())).slice(-2)} /
-                             { ("0" + (new Date(shift.endShift.date).getHours())).slice(-2)}:{("0" + (new Date(shift.endShift.date).getMinutes())).slice(-2)}</p>
-                             <b>{shift.branch}</b> 
-                          </>
-                          : <b>OFF</b> }
-                   
-                    </td>)
-                }
-            }
-
-            )}
-        </tr>
+          })}
         </>
     )
 }

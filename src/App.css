@@ -2,7 +2,7 @@ body{
   background-image: none;
   background-color: white;
   font: 400 13px Roboto, Arial, sans-serif;
-  
+
   /* font-family:futura-lt-w01-light,sans-serif; */
   /* font:normal normal normal 18px/22px raleway,sans-serif;  */
 overflow-x: hidden;
@@ -97,3 +97,6 @@ background-color: #ddd;
 }
 
 
+.aire{
+ min-height: 3.5rem;
+}
