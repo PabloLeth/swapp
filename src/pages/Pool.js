@@ -52,6 +52,7 @@ function Pool() {
         </div>
          
       </div>
+      <div className="aire"></div>
       <Footer />
     </>
   );

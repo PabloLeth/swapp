@@ -92,6 +92,7 @@ function Weekshifts({ worker, week, setShifts, shifts }) {
         if (existingEndShift) {
 
             existingEndShift = { ...existingEndShift, startShift: (datestr + " " + e.target.value), active: true }
+            console.log(existingEndShift);
             workerObj = updateShiftInWorker(existingEndShift, workerObj);
 
         } else if (existingStartShift) {
@@ -152,7 +153,7 @@ function Weekshifts({ worker, week, setShifts, shifts }) {
                 let cabecera = "";
                 let wid = worker.id;
 
-                if (type == "1") { /* para poner cabecera con nombre en mañana y tarde por rowspan */
+                if (type == "1") { 
                     cabecera = <th className="table-dark align-middle" rowspan="2" id={worker.id} >{capitalize(worker.worker)}</th>;
                 }
                 return (

@@ -195,9 +195,13 @@ useEffect(() => {
                     </tbody>
                     <tfoot className="text-center">
                       <tr>
-                        <td colspan="8" className="table-dark">
+                        <td colspan="7" className="table-dark">
 
                       <button  className="btn btn-success" onClick={()=>{sendToDb()}}>Enviar a DB</button>
+                        </td>
+                        <td  className="table-dark">
+
+                      <button  className="btn btn-success" onClick={()=>{muestrashifts()}}>turnos consola</button>
                         </td>
                       </tr>
                     </tfoot>
