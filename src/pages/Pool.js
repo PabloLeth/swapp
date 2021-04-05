@@ -42,17 +42,17 @@ function Pool() {
 
       <div className="container">
         {/* <p>este es el Pool donde aparecen los turnos que se van a cambiar con otros usuarios</p> */}
-        {isLoading ? <ShiftList data={filteredData}/> :  <SearchShifts setFilteredData = {setFilteredData} data = {data}/> }
+        {isLoading ? <ShiftList data={filteredData}/> :  <SearchShifts setFilteredData = {setFilteredData} data = {data} filteredData = { filteredData}/> }
        
         {/* <div className="container pool-back"> */}
-        <div className={`container ${ filteredData ? filteredData.length==0?  "":"pool-back":""}`}>
-          <div className="row d-flex justify-content-around">
+        <div className={` container card-deck ${ filteredData ? filteredData.length==0?  "":"pool-back":""}`}>
+          <div className=" d-flex ">
            { filteredData ? filteredData.length==0?  <h3>No results to show {sad} </h3>:<ShiftList data={filteredData}/>:""}
           </div>
         </div>
          
       </div>
-      <div className="aire"></div>
+      {/* <div className="aire"></div> */}
       <Footer />
     </>
   );

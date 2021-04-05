@@ -36,21 +36,21 @@ function Weekshifts({ worker, week, setShifts, shifts }) {
     const existEndShift = (workerObj, type, datestr) => {
         let existingEndShift = workerObj.shifts.find(shift =>
             shift.shiftType == type
-            && typeof shift.endShift == "string"
-            && shift.endShift.substring(0, 10) == datestr);
+            && typeof shift.date == "string"
+            && shift.date.substring(0, 10) == datestr);
         return existingEndShift;
     }
     const existStartShift = (workerObj, type, datestr) => {
-        let existingStartShift = workerObj.shifts?.find(shift =>
+        let existingStartShift = workerObj.shifts.find(shift =>
             shift.shiftType == type
-            && typeof shift.date == "string"
+            && typeof shift.startShift == "string"
             && shift.date.substring(0, 10) == datestr);
         return existingStartShift;
     }
 
     const toggleInput = (e, type, datestr, wid) => {
         let inputsTarget = e.currentTarget.firstChild;
-        console.log(inputsTarget);
+    
         let workerObj = shifts.find(w => { return w.id == wid });
         let existingShift = existAnyShift(workerObj, type, datestr);
 
@@ -90,16 +90,18 @@ function Weekshifts({ worker, week, setShifts, shifts }) {
         let existingEndShift = existEndShift(workerObj, type, datestr);
         let existingStartShift = existStartShift(workerObj, type, datestr);
         if (existingEndShift) {
-
+       
             existingEndShift = { ...existingEndShift, startShift: (datestr + " " + e.target.value), active: true }
-            console.log(existingEndShift);
+          
             workerObj = updateShiftInWorker(existingEndShift, workerObj);
 
         } else if (existingStartShift) {
+          
             existingStartShift = { ...existingStartShift, startShift: (datestr + " " + e.target.value) }
             workerObj = updateShiftInWorker(existingStartShift, workerObj);
 
         } else {
+ 
             workerObj.shifts.push({
                 date: datestr,
                 shiftType: type,
@@ -114,7 +116,7 @@ function Weekshifts({ worker, week, setShifts, shifts }) {
     }
 
     const getEndValue = (e, type, datestr, wid) => {
-
+  
         if (!e.target.value) {
             return;
         }
@@ -125,16 +127,19 @@ function Weekshifts({ worker, week, setShifts, shifts }) {
         let existingStartShift = existStartShift(workerObj, type, datestr);
 
         if (existingStartShift) {
-
+           
             existingStartShift = { ...existingStartShift, endShift: (datestr + " " + e.target.value), active: true }
             workerObj = updateShiftInWorker(existingStartShift, workerObj);
         } else if (existingEndShift) {
+          
             existingEndShift = { ...existingEndShift, endShift: (datestr + " " + e.target.value) }
             workerObj = updateShiftInWorker(existingEndShift, workerObj);
 
 
         } else {
+         
             workerObj.shifts.push({
+               date : datestr,
                 shiftType: type,
                 endShift: (datestr + " " + e.target.value)
             })

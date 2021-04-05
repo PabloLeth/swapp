@@ -31,3 +31,6 @@ body{
     background-size: cover;
     border-radius: 15px;
   }
+  .my-card-size{
+      width: 200px;
+  }

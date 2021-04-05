@@ -173,7 +173,7 @@ useEffect(() => {
             </div>
         </div>
        
-            <form action=" " id="content-wrap">
+            <div id="content-wrap">
                 <table id="table-rota" className="table table-sm text-center mb-2">
             
                     <thead className="table-dark ">
@@ -195,18 +195,18 @@ useEffect(() => {
                     </tbody>
                     <tfoot className="text-center">
                       <tr>
-                        <td colspan="7" className="table-dark">
+                        <td colspan="8" className="table-dark">
 
                       <button  className="btn btn-success" onClick={()=>{sendToDb()}}>Enviar a DB</button>
                         </td>
-                        <td  className="table-dark">
+                        {/* <td  className="table-dark">
 
                       <button  className="btn btn-success" onClick={()=>{muestrashifts()}}>turnos consola</button>
-                        </td>
+                        </td> */}
                       </tr>
                     </tfoot>
                 </table>
-            </form>
+            </div>
            
             <Footer />
   

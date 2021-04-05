@@ -10,7 +10,7 @@ import Profile from './pages/Profile';
 import Rota from "./components/Rota";
 import Manager from './pages/Manager';
 import Pool from './pages/Pool';
-import Patata from './pages/Patata';
+
 import NoMatch from './pages/NoMatch';
 import LoginPage from './pages/LoginPage';
 import PrivateRoute from './PrivateRoute';
@@ -59,7 +59,7 @@ const logout = ()=> {
         <Route  path="/profile/rota" component={Rota} />
         <PrivateRoute  path="/manager" component={Manager} /> 
         <Route  path="/login" component={LoginPage} />
-        <Route  path="/patata" component={Patata} />
+   
        
       </div>
     </BrowserRouter>

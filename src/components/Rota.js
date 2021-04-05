@@ -102,6 +102,8 @@ function Rota() {
             <a href="#" onClick={()=>{handlenext()}}> Next week {arrowR}</a>
             </div>
         </div>
+
+        <div id="content-wrap">
             <table className="table table-responsive-sm table-responsive-md text-center mb-4">
                 <thead className="table-dark">
                     <tr>
@@ -118,6 +120,7 @@ function Rota() {
 
                 </tbody>
             </table>
+        </div>
         
             <Footer />
         </>

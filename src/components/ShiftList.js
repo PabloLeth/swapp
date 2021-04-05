@@ -57,7 +57,7 @@ const swappingFetch = (id) =>{
 
               return (
                 <div className="my-card">
-                <div className="card text-center mx-2 my-3 ">
+                <div className="card my-card-size text-center mx-2 my-3 ">
                   <div className= {`card-body ${shiftType == "morning" ? " morning": "evening" }`}>
            
                     <h3 className="card-text"><b>{week[new Date(startShift.date).getDay()]}</b></h3>
@@ -68,7 +68,7 @@ const swappingFetch = (id) =>{
                     <p className="card-text">from: <b>{startShift.date.slice(11, 16)} - {endShift.date.slice(11, 16)}</b></p>
 
                     <p className="card-text">Change with: {worker}</p>
-                    <a href="#" className="p-2"id={id} onClick={()=>takeShift(id)}>me lo quedo</a>
+                    <a href="#" className="p-2"id={id} onClick={()=>takeShift(id)}>Take it!</a>
                   </div>
                 </div>
                 </div>
