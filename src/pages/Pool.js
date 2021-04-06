@@ -14,25 +14,27 @@ function Pool() {
     error: null,
     isLoading: true
   });
-  const[filteredData, setFilteredData]=useState(data);
-
+  const [filteredData, setFilteredData]=useState(data);
+  // const [taken, setTaken] = useState("");
 
   const URLPOOL = "http://localhost:8000/shift/pool";
-
-  useEffect(() => {
+  const poolFetch = ()=>{
     fetch(URLPOOL, {headers: { Authorization : `Bearer ${token}`}, })
 
-      .then(response => response.json())
-      .then(data => {dispatch({ data, error: null, isLoading: false })
+    .then(response => response.json())
+    .then(data => {dispatch({ data, error: null, isLoading: false })
 
-        console.log(data);
-       }
+      console.log(data);
+     }
 
-      ).catch(error => {
-        dispatch({ data: null, error, isLoading: false })
-        console.log("ha habido un error:", error)
-      });
-
+    ).catch(error => {
+      dispatch({ data: null, error, isLoading: false })
+      console.log("ha habido un error:", error)
+    });
+  }
+  useEffect(() => {
+   
+    poolFetch();
 
   }, []);
 
@@ -42,12 +44,15 @@ function Pool() {
 
       <div className="container">
         {/* <p>este es el Pool donde aparecen los turnos que se van a cambiar con otros usuarios</p> */}
-        {isLoading ? <ShiftList data={filteredData}/> :  <SearchShifts setFilteredData = {setFilteredData} data = {data} filteredData = { filteredData}/> }
+        {isLoading ? 
+        <ShiftList data={filteredData}/> : 
+        <SearchShifts setFilteredData = {setFilteredData} data = {data} filteredData = { filteredData}/> 
+        }
        
         {/* <div className="container pool-back"> */}
         <div className={` container card-deck ${ filteredData ? filteredData.length==0?  "":"pool-back":""}`}>
           <div className=" d-flex ">
-           { filteredData ? filteredData.length==0?  <h3>No results to show {sad} </h3>:<ShiftList data={filteredData}/>:""}
+           { filteredData ? filteredData.length==0?  <h3>No results to show {sad} </h3>:<ShiftList data={filteredData} setFilteredData = {setFilteredData} />:""}
           </div>
         </div>
          

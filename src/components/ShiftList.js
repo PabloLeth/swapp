@@ -1,5 +1,5 @@
 import swal from 'sweetalert';
-function ShiftList({ data}) {
+function ShiftList({ data }) {
   if (!data) {
     return <p>loading...</p>
   }
@@ -24,7 +24,10 @@ const swappingFetch = (id) =>{
   .then(response => response.json())
   .then(data => {
     console.log(data.answer);
-    // dispatch({ data, error: null, isLoading: false }); necesito filtrar la data para hacer un pop por el id
+   
+      swal("Boom! thats your shift now!", {
+          icon: "success",
+        });
   }
   ).catch(error => {
     console.log("ha habido un error:", error)
@@ -43,9 +46,7 @@ const swappingFetch = (id) =>{
       if (willSend) {
           
           swappingFetch(id);
-        swal("Boom! thats your shift now!", {
-          icon: "success",
-        });
+      
       } else {
         swal("are you still looking for more work?!");
       }

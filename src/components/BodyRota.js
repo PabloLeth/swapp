@@ -72,7 +72,7 @@ function BodyRota({ data, week, check, setCheck }) {
     })
       .then((willSend) => {
         if (willSend) {
-          /* meter un fetch a http://localhost:8000/shift/swapping/${e.target.id} */
+       
           swappingFetch(e.id);
 
         } else {
