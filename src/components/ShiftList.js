@@ -15,6 +15,10 @@ function ShiftList({ data}) {
     body: JSON.stringify({swapping : 0 })
    
 };
+const capitalize = (s) => {
+  if (typeof s !== 'string') return '';
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
 const swappingFetch = (id) =>{
   fetch(`${URLSHIFT}/${id}`,reqOpt)
   .then(response => response.json())
@@ -63,11 +67,11 @@ const swappingFetch = (id) =>{
                     <h3 className="card-text"><b>{week[new Date(startShift.date).getDay()]}</b></h3>
                     <p className="card-text"><b>{startShift.date.slice(5, 10)}</b></p>
 
-                    <h4 className="card-text">{shiftType}</h4>
+                    <h4 className="card-text">{capitalize(shiftType)}</h4>
                     <h5 className="card-text"> {branch}</h5>
-                    <p className="card-text">from: <b>{startShift.date.slice(11, 16)} - {endShift.date.slice(11, 16)}</b></p>
+                    <p className="card-text">From: <b>{startShift.date.slice(11, 16)} - {endShift.date.slice(11, 16)}</b></p>
 
-                    <p className="card-text">Change with: {worker}</p>
+                    <p className="card-text">Change with: {capitalize(worker)}</p>
                     <a href="#" className="p-2"id={id} onClick={()=>takeShift(id)}>Take it!</a>
                   </div>
                 </div>
