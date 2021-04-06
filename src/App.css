@@ -117,3 +117,13 @@ height: 50px;
 width: 50px;
 margin: 0;
 }
+.nav-user h6{
+  color: #999;
+}
+.nav-user-picture{
+  height: 30px;
+  width: 30px;
+  border-radius: 20px;
+  background-image: url(./images/user.png);
+background-size: cover;
+}

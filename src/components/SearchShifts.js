@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 function SearchShifts({ setFilteredData, data, filteredData }) {
   const [search, setSearch] = useState("");
   const [searchHour, setSearchHour] = useState("");
+  const [typeFilter, setTypeFilter] = useState("");
   
 
   const handleSubmit = (e) => {
@@ -17,10 +18,10 @@ function SearchShifts({ setFilteredData, data, filteredData }) {
     setFilteredData(results);
   }, [search]);
 
-  const setFilter = (value) => {
-    const result = filteredData.filter(data => data.shiftType == value);
-    setFilteredData(result);
-  }
+  // const setFilter = (value) => {
+  //   const result = filteredData.filter(data => data.shiftType == value);
+  //   setFilteredData(result);
+  // }
   return (
     <>
 
@@ -33,12 +34,12 @@ function SearchShifts({ setFilteredData, data, filteredData }) {
             placeholder="Branch..."
             value={search} onChange={(e) => { setSearch(e.target.value) }} />
           <input className="my-2 btn btn-info" type="submit" value="Search" />
-          <div>
+          {/* <div>
           <input type="checkbox" id="morning" value="morning" checked onChange={(e) => { setFilter(e.target.value) }} />
           <label htmlFor="morning">Morning</label>
           <input type="checkbox" id="evening" value="evening" checked onChange={(e) => { setFilter(e.target.value) }} />
           <label htmlFor="evening">Evening</label>
-          </div>
+          </div> */}
         </form>
        
       </div>    
