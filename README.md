@@ -1,6 +1,21 @@
-# Getting Started with Create React App
+# About Swapp
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project its a web application whose goal is to help companies to deal with staff rotative shifts, enabling the workers to swap their shifts among themselves.
+
+This project also count with a server based in PHP which you should run together for a better expirience [swapp_backend](https://github.com/PabloLeth/swapp_backend.git).
+
+FYI the Data Base that you can find atached to this project its a dummy data base with not real data just to get the notion of the web-app.
+
+
+# Getting Started
+
+To get the project running all you need to do is follow this steps.
+
+first, git clone this project.
+
+then run npm install on the actual folder.
+
+once all the dependencies are installed, you should be able to run the following scripts
 
 ## Available Scripts
 
