@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
 import Weekshifts from './Weekshifts';
 import Footer from '../components/Footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -97,9 +96,6 @@ useEffect(() => {
     return setWeek(weekResult);
   }
 
-  const muestrashifts = () =>{  
-      console.log("turnos",shifts);
-  }
  
   const sendFetch = () => {
     const URLADD = "http://localhost:8000/shift/manager/new";
@@ -182,7 +178,9 @@ useEffect(() => {
                     </tr>
                     <tr>
                         <th className="th-rad" scope="col"></th>
-                        {week.map(day => { return <th colspan="1" scope="col">{("0" + day.getDate()).slice(-2)} - {("0" + (day.getMonth() + 1)).slice(-2)}</th> })}
+                        {week.map(day =>
+                           { return <th colspan="1" scope="col">{("0" + day.getDate()).slice(-2)} - {("0" + (day.getMonth() + 1)).slice(-2)}</th> }
+                        )}
 
                     </tr>
                     </thead>
@@ -199,10 +197,7 @@ useEffect(() => {
 
                       <button  className="btn btn-success" onClick={()=>{sendToDb()}}>Enviar a DB</button>
                         </td>
-                        {/* <td  className="table-dark">
-
-                      <button  className="btn btn-success" onClick={()=>{muestrashifts()}}>turnos consola</button>
-                        </td> */}
+                    
                       </tr>
                     </tfoot>
                 </table>

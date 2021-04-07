@@ -88,7 +88,7 @@ function BodyRota({ data, week, check, setCheck }) {
       {shiftType.map(type => {
         return <tr className="">
           <th className="table-dark align-middle">{capitalize(type)}</th>
-          {/* {data.length === 0 ? <td colspan="7"> <h3>  No Rota Yet</h3></td> : ""} */}
+        
           {week.map(day => {
             let datestr = day.toISOString().slice(0, 10);
 

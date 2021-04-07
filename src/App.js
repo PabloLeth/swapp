@@ -1,17 +1,14 @@
-import React, { useState, useContext } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
 import {AuthContext} from './context/auth';
 import './App.css';
 import Navbar from './components/Navbar';
-import Footer from './components/Footer';
 import Index from './pages/Index';
 import jwt_decode from "jwt-decode";
 import Profile from './pages/Profile';
 import Rota from "./components/Rota";
 import Manager from './pages/Manager';
 import Pool from './pages/Pool';
-
-import NoMatch from './pages/NoMatch';
 import LoginPage from './pages/LoginPage';
 import PrivateRoute from './PrivateRoute';
 
@@ -64,7 +61,7 @@ const logout = ()=> {
       </div>
     </BrowserRouter>
      </AuthContext.Provider>
-     {/* {(logged())? <Footer/> : ""} */}
+
       </>
     );
   }

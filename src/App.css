@@ -127,3 +127,10 @@ margin: 0;
   background-image: url(./images/user.png);
 background-size: cover;
 }
+.logo-bg{
+  background: url(./images/logo2.png);
+  height: 100px;
+  width: 100px;
+  background-size: cover;
+
+}

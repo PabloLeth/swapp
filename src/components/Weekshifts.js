@@ -169,8 +169,12 @@ function Weekshifts({ worker, week, setShifts, shifts }) {
                             let datestr = day.toISOString().slice(0, 10);
 
 
-                            let conditionShift = worker.shifts.find(shift => shift.shiftType == type && shift.id && new Date ((new Date(shift.date.date).getTime()) + 120*60*1000+1).toISOString().slice(0, 10) == datestr);
-                            let conditionActive = worker.shifts.find(shift => shift.shiftType == type && typeof shift.date == "string" && shift.date.substring(0, 10) == datestr);
+                            let conditionShift = worker.shifts.find(shift => shift.shiftType == type 
+                                && shift.id
+                                && new Date ((new Date(shift.date.date).getTime()) + 120*60*1000+1).toISOString().slice(0, 10) == datestr);
+                            let conditionActive = worker.shifts.find(shift => shift.shiftType == type 
+                                && typeof shift.date == "string" 
+                                && shift.date.substring(0, 10) == datestr);
 
                             
                             if (conditionShift) {

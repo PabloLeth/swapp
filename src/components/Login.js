@@ -1,10 +1,9 @@
 import { useContext,useState } from 'react';
-import { GlobalContext } from '../context/GlobalContext';
 import {Redirect} from 'react-router-dom';
 import {useAuth} from '../context/auth'
 
 function Login() {
-    // const {isloged, setIsloged} = useContext(GlobalContext);
+
     const [isloged, setIsloged] = useState(false);
 const {setAuthTokens} = useAuth();
 
@@ -24,9 +23,9 @@ const {setAuthTokens} = useAuth();
     const URLLOGIN = "http://localhost:8000/login";
 
     const login = (e) => {
-        // funtcion to log into Swapp
+  
         e.preventDefault();
-       // alert(`tu usuario ${loginInput.username} y contraseña ${loginInput.password} `);
+     
 
         fetch(URLLOGIN, {
             method: 'POST',
@@ -58,6 +57,7 @@ const {setAuthTokens} = useAuth();
 
 
                 <div className="loginContainer" id="loginContainer">
+                    <h1 className="logo-bg"></h1>
                     <h1>Inicio de sesión</h1>
                     <form>
                         <div className="form-group form ">

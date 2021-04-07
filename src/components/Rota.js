@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
-import ModalShift from './ModalShift';
 import BodyRota from './BodyRota';
-import {Redirect, Route} from 'react-router-dom';
 import Footer from '../components/Footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight  } from '@fortawesome/free-solid-svg-icons';
